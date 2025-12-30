@@ -1,0 +1,1171 @@
+<div class="door-title">
+        <h1>🧭 PORTE P13 — Espace (reverb / delay / profondeur)</h1>
+        <div class="meta">Mockup “app-like” : cartes, tables cochables, sections repliables (≃ Titre 4 Word). — <b>Tout est sauvegardé automatiquement</b> (localStorage).</div>
+      </div>
+
+      <!-- 0bis) GUIDE RAPIDE -->
+      <section class="card tech" id="workflow" data-section>
+        <header>
+          <div class="h">
+            <span class="tag"><svg><use href="#i-gear"/></svg>0bis) GUIDE RAPIDE</span>
+            <span>Ne pas se perdre dans la porte</span>
+          </div>
+          <div class="sub">Micro-checklist pour sécuriser tes étapes</div>
+        </header>
+        <div class="body">
+          <ul>
+            <li><b>Commence par verrouiller PATH/TARGET</b> : choisis un chemin primaire dans <a href="#path">PATH PICKER</a> puis le couple primaire/secondaire dans <a href="#target">TARGET PICKER</a> avant d’ouvrir d’autres blocs.</li>
+            <li><b>Utilise les états bloquants</b> : passe par le bloc <a href="#tests">[TEST:ALWAYS]</a> pour cocher les tests obligatoires ; la barre de progression et le bouton <i>Done</i> se mettent à jour automatiquement.</li>
+            <li><b>Active les toggles “STOP” si doute</b> : bascule <code>[TOGGLE:SIG_OFF]</code> ou <code>[TOGGLE:CTRL_OFF]</code> dans <a href="#state">STATE</a> avant de modifier des écoutes pour éviter un run incohérent.</li>
+            <li><b>Raccourcis et navigation</b> : Ctrl+K ouvre la palette de commandes, et la navigation latérale suit ton scroll (highlight auto) pour revenir vite aux sections critiques.</li>
+            <li><b>Prends des notes rapides</b> : journalise les essais dans <a href="#journal">JOURNAL</a> ; tout est auto-sauvegardé (localStorage) pour ne pas reperdre le contexte.</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- 0) STATE -->
+      <section class="card state" id="state" data-section>
+        <header>
+          <div class="h">
+            <span class="tag"><svg><use href="#i-compass"/></svg>0) [STATE]</span>
+            <span>Bandeau d’état</span>
+          </div>
+          <div class="sub">Table (cases + liens rapides)</div>
+        </header>
+
+        <div class="body">
+          <table>
+            <tr>
+              <th style="width:220px;">Champ</th>
+              <th>Valeur</th>
+            </tr>
+            <tr>
+              <td><b>Status</b></td>
+              <td>
+                <label class="opt"><input id="status_active" name="status" type="radio" value="ACTIVE"> ACTIVE</label>
+                <label class="opt"><input id="status_done" name="status" type="radio" value="DONE"> DONE</label>
+                <label class="opt"><input id="status_needs_retest" name="status" type="radio" value="NEEDS_RETEST"> NEEDS_RETEST</label>
+                <label class="opt"><input id="status_risk" name="status" type="radio" value="RISK"> RISK</label>
+              </td>
+            </tr>
+            <tr>
+              <td><b>Toggles</b></td>
+              <td>
+                <label class="opt"><input id="toggle_sig_off" type="checkbox"> <span class="tag" data-tip="Kill-switch signature (coupe tous returns/throws).">[TOGGLE:SIG_OFF]</span></label>
+                <label class="opt"><input id="toggle_ctrl_off" type="checkbox"> <span class="tag" data-tip="Coupe contrôles/compensations si tu veux isoler une cause.">[TOGGLE:CTRL_OFF]</span></label>
+              </td>
+            </tr>
+            <tr>
+              <td><b>Checkpoint actuel</b></td>
+              <td>
+                <a href="#checkpoints">[CHECKPOINT:PH2_LOCKED]</a> / <a href="#checkpoints">[CHECKPOINT:PH3_LOCKED]</a>
+              </td>
+            </tr>
+            <tr>
+              <td><b>RISK_BADGE</b></td>
+              <td><input id="state_risk_badge" class="fill" placeholder="ex: FX sujet / nuage / mono fragile / groove cassé"></td>
+            </tr>
+            <tr>
+              <td><b>DEPENDS / REOPENS</b></td>
+              <td>
+                ⚠ <a href="#depends">[DEPENDS_ON:P11]</a>&nbsp;
+                ⚠ <a href="#depends">[DEPENDS_ON:P8]</a>&nbsp;
+                ⚠ <a href="#depends">[DEPENDS_ON:P10]</a>&nbsp;
+                / ⚠ <a href="#depends">[REOPENS:P13]</a>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </section>
+
+      <!-- 1) PATH PICKER -->
+      <section class="card path" id="path" data-section>
+        <header>
+          <div class="h">
+            <span class="tag">1) PATH</span>
+            <span>PATH PICKER — TRIAL → COMMIT</span>
+          </div>
+          <div class="sub">TRIAL max 2 / COMMIT 1 obligatoire</div>
+        </header>
+
+        <div class="body">
+          <table>
+            <tr>
+              <th>PATH</th>
+              <th class="center">TRIAL</th>
+              <th class="center">COMMIT</th>
+              <th class="small">CROIX</th>
+              <th>RISK_FOCUS</th>
+              <th class="small">➡ TECH PACK</th>
+            </tr>
+
+            <tr class="path-row" data-kind="path-row" data-path="Ultra dry" data-croix="moins “cinéma”" data-risk="plat / voix “dans la tête”">
+              <td>Ultra dry (front, docu, impact)</td>
+              <td class="center"><input id="path_trial_ultradry" class="path-trial" type="checkbox"></td>
+              <td class="center"><input id="path_commit_ultradry" class="path-commit" type="checkbox"></td>
+              <td>moins “cinéma”</td>
+              <td>plat / voix “dans la tête”</td>
+              <td><a href="#tech-path-ultradry">Preset PATH:Ultra dry</a></td>
+            </tr>
+
+            <tr class="path-row" data-kind="path-row" data-path="Tight room" data-croix="moins “grand monde”" data-risk="boxy/voile">
+              <td>Tight room (proche, réaliste)</td>
+              <td class="center"><input id="path_trial_tightroom" class="path-trial" type="checkbox"></td>
+              <td class="center"><input id="path_commit_tightroom" class="path-commit" type="checkbox"></td>
+              <td>moins “grand monde”</td>
+              <td>boxy/voile</td>
+              <td><a href="#tech-path-tightroom">Preset PATH:Tight room</a></td>
+            </tr>
+
+            <tr class="path-row" data-kind="path-row" data-path="Plate luxe" data-croix="moins “rap ultra sec”" data-risk="diction noyée si non duckée">
+              <td>Plate luxe (halo dense, pop/classy)</td>
+              <td class="center"><input id="path_trial_plateluxe" class="path-trial" type="checkbox"></td>
+              <td class="center"><input id="path_commit_plateluxe" class="path-commit" type="checkbox"></td>
+              <td>moins “rap ultra sec”</td>
+              <td>diction noyée si non duckée</td>
+              <td><a href="#tech-path-plateluxe">Preset PATH:Plate luxe</a></td>
+            </tr>
+
+            <tr class="path-row" data-kind="path-row" data-path="Chamber" data-croix="moins “ultra wide”" data-risk="flou si trop long">
+              <td>Chamber (naturel, profondeur élégante)</td>
+              <td class="center"><input id="path_trial_chamber" class="path-trial" type="checkbox"></td>
+              <td class="center"><input id="path_commit_chamber" class="path-commit" type="checkbox"></td>
+              <td>moins “ultra wide”</td>
+              <td>flou si trop long</td>
+              <td><a href="#tech-path-chamber">Preset PATH:Chamber</a></td>
+            </tr>
+
+            <tr class="path-row" data-kind="path-row" data-path="Hall cinematic" data-croix="moins lisible" data-risk="tails envahissantes / FX sujet">
+              <td>Hall cinematic (grand écran)</td>
+              <td class="center"><input id="path_trial_hall" class="path-trial" type="checkbox"></td>
+              <td class="center"><input id="path_commit_hall" class="path-commit" type="checkbox"></td>
+              <td>moins lisible</td>
+              <td>tails envahissantes / FX sujet</td>
+              <td><a href="#tech-path-hall">Preset PATH:Hall cinematic</a></td>
+            </tr>
+
+            <tr class="path-row" data-kind="path-row" data-path="Slapback" data-croix="moins profondeur longue" data-risk="répétition audible / groove">
+              <td>Slapback (épaisseur / vibe)</td>
+              <td class="center"><input id="path_trial_slapback" class="path-trial" type="checkbox"></td>
+              <td class="center"><input id="path_commit_slapback" class="path-commit" type="checkbox"></td>
+              <td>moins profondeur longue</td>
+              <td>répétition audible / groove</td>
+              <td><a href="#tech-path-slapback">Preset PATH:Slapback</a></td>
+            </tr>
+
+            <tr class="path-row" data-kind="path-row" data-path="Delay rythmique" data-croix="moins naturalité" data-risk="masque texte / pattern dominant">
+              <td>Delay rythmique (bounce, groove)</td>
+              <td class="center"><input id="path_trial_delay" class="path-trial" type="checkbox"></td>
+              <td class="center"><input id="path_commit_delay" class="path-commit" type="checkbox"></td>
+              <td>moins naturalité</td>
+              <td>masque texte / pattern dominant</td>
+              <td><a href="#tech-path-delay">Preset PATH:Delay rythmique</a></td>
+            </tr>
+
+            <tr class="path-row" data-kind="path-row" data-path="Ping-pong wide" data-croix="moins mono béton" data-risk="centre instable / corrélation">
+              <td>Ping-pong wide (scène large)</td>
+              <td class="center"><input id="path_trial_pingpong" class="path-trial" type="checkbox"></td>
+              <td class="center"><input id="path_commit_pingpong" class="path-commit" type="checkbox"></td>
+              <td>moins mono béton</td>
+              <td>centre instable / corrélation</td>
+              <td><a href="#tech-path-pingpong">Preset PATH:Ping-pong wide</a></td>
+            </tr>
+
+            <tr class="path-row" data-kind="path-row" data-path="Throws/Multi-tap" data-croix="moins monde stable" data-risk="gimmick répétitif">
+              <td>Throws / multi-tap (ponctuation)</td>
+              <td class="center"><input id="path_trial_throws" class="path-trial" type="checkbox"></td>
+              <td class="center"><input id="path_commit_throws" class="path-commit" type="checkbox"></td>
+              <td>moins monde stable</td>
+              <td>gimmick répétitif</td>
+              <td><a href="#tech-path-throws">Preset PATH:Throws/Multi-tap</a></td>
+            </tr>
+
+            <tr class="path-row" data-kind="path-row" data-path="Signature" data-croix="moins robustesse universelle" data-risk="fatigue / FX sujet / mono">
+              <td>Signature (reverse/gated/shimmer/blackhole)</td>
+              <td class="center"><input id="path_trial_signature" class="path-trial" type="checkbox"></td>
+              <td class="center"><input id="path_commit_signature" class="path-commit" type="checkbox"></td>
+              <td>moins robustesse universelle</td>
+              <td>fatigue / FX sujet / mono</td>
+              <td><a href="#tech-path-signature">Preset PATH:Signature</a></td>
+            </tr>
+
+            <tr class="path-row" data-kind="path-row" data-path="Convolution spéciale" data-croix="moins contrôle simple" data-risk="résonances / monde incohérent">
+              <td>Convolution spéciale (IR “weird space”)</td>
+              <td class="center"><input id="path_trial_convolution" class="path-trial" type="checkbox"></td>
+              <td class="center"><input id="path_commit_convolution" class="path-commit" type="checkbox"></td>
+              <td>moins contrôle simple</td>
+              <td>résonances / monde incohérent</td>
+              <td><a href="#tech-path-convolution">Preset PATH:Convolution spéciale</a></td>
+            </tr>
+          </table>
+
+          <div class="hr"></div>
+          <div class="muted">
+            <b>Règles (factuelles)</b>
+            <ul>
+              <li>TRIAL : maximum 2 chemins cochés.</li>
+              <li>COMMIT : 1 seul chemin coché (obligatoire).</li>
+              <li>Si COMMIT non coché → porte ≠ DONE.</li>
+              <li>Après COMMIT : pas de changement de chemin sans FAIL prouvé + trigger noté. <a class="ref" href="#r3-07" data-tip="Après COMMIT, tu ne changes pas de monde sans FAIL prouvé + trigger noté.">[REF:R3-07]</a></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- 1bis) TARGET -->
+      <section class="card target" id="target" data-section>
+        <header>
+          <div class="h">
+            <span class="tag">1bis) TARGET</span>
+            <span>TARGET PICKER — SCOPE</span>
+          </div>
+          <div class="sub">PRIMARY 1 obligatoire / SECONDARY 0–2</div>
+        </header>
+
+        <div class="body">
+          <table>
+            <tr>
+              <th>TARGET</th>
+              <th class="center">PRIMARY</th>
+              <th class="center">SECONDARY</th>
+              <th class="small">DEFAULT/COND</th>
+              <th class="small">BUT</th>
+              <th>RISK_FOCUS</th>
+              <th class="small">➡ TECH PACK</th>
+            </tr>
+
+            <tr class="target-row" data-kind="target-row" data-target="RETURNS">
+              <td>RETURNS (reverb/delay buses)</td>
+              <td class="center"><input id="target_primary_returns" class="target-primary" type="checkbox"></td>
+              <td class="center"><input id="target_secondary_returns" class="target-secondary" type="checkbox"></td>
+              <td>DEFAULT</td>
+              <td>scène stable</td>
+              <td>boue / fizz</td>
+              <td><a href="#tech-target-p13">Preset TARGET:P13</a></td>
+            </tr>
+
+            <tr class="target-row" data-kind="target-row" data-target="LEAD">
+              <td>LEAD (sends depuis lead)</td>
+              <td class="center"><input id="target_primary_lead" class="target-primary" type="checkbox"></td>
+              <td class="center"><input id="target_secondary_lead" class="target-secondary" type="checkbox"></td>
+              <td>COND</td>
+              <td>plan avant</td>
+              <td>lead recule</td>
+              <td><a href="#tech-target-p13">Preset TARGET:P13</a></td>
+            </tr>
+
+            <tr class="target-row" data-kind="target-row" data-target="DOUBLES/BACKS">
+              <td>DOUBLES / BACKS</td>
+              <td class="center"><input id="target_primary_doubles" class="target-primary" type="checkbox"></td>
+              <td class="center"><input id="target_secondary_doubles" class="target-secondary" type="checkbox"></td>
+              <td>COND</td>
+              <td>reculer couches</td>
+              <td>secondaires devant</td>
+              <td><a href="#tech-target-p13">Preset TARGET:P13</a></td>
+            </tr>
+
+            <tr class="target-row" data-kind="target-row" data-target="HARMONIES">
+              <td>HARMONIES</td>
+              <td class="center"><input id="target_primary_harmonies" class="target-primary" type="checkbox"></td>
+              <td class="center"><input id="target_secondary_harmonies" class="target-secondary" type="checkbox"></td>
+              <td>COND</td>
+              <td>profondeur</td>
+              <td>flou</td>
+              <td><a href="#tech-target-p13">Preset TARGET:P13</a></td>
+            </tr>
+
+            <tr class="target-row" data-kind="target-row" data-target="ADLIBS">
+              <td>ADLIBS</td>
+              <td class="center"><input id="target_primary_adlibs" class="target-primary" type="checkbox"></td>
+              <td class="center"><input id="target_secondary_adlibs" class="target-secondary" type="checkbox"></td>
+              <td>COND</td>
+              <td>accent/throws</td>
+              <td>gimmick</td>
+              <td><a href="#tech-target-p13">Preset TARGET:P13</a></td>
+            </tr>
+
+            <tr class="target-row" data-kind="target-row" data-target="CHOPS">
+              <td>CHOPS</td>
+              <td class="center"><input id="target_primary_chops" class="target-primary" type="checkbox"></td>
+              <td class="center"><input id="target_secondary_chops" class="target-secondary" type="checkbox"></td>
+              <td>COND</td>
+              <td>ponctuation</td>
+              <td>masque</td>
+              <td><a href="#tech-target-p13">Preset TARGET:P13</a></td>
+            </tr>
+
+            <tr class="target-row" data-kind="target-row" data-target="BUS VOCAL">
+              <td>BUS VOCAL</td>
+              <td class="center"><input id="target_primary_busvocal" class="target-primary" type="checkbox"></td>
+              <td class="center"><input id="target_secondary_busvocal" class="target-secondary" type="checkbox"></td>
+              <td>RARE</td>
+              <td>monde commun</td>
+              <td>cumul invisible</td>
+              <td><a href="#tech-target-p13">Preset TARGET:P13</a></td>
+            </tr>
+
+            <tr class="target-row" data-kind="target-row" data-target="MIXBUS">
+              <td>MIXBUS (rare)</td>
+              <td class="center"><input id="target_primary_mixbus" class="target-primary" type="checkbox"></td>
+              <td class="center"><input id="target_secondary_mixbus" class="target-secondary" type="checkbox"></td>
+              <td>RARE</td>
+              <td>colle globale</td>
+              <td>cumul</td>
+              <td><a href="#tech-target-p13">Preset TARGET:P13</a></td>
+            </tr>
+          </table>
+
+          <div class="hr"></div>
+          <div class="muted">
+            <b>Règles</b>
+            <ul>
+              <li>PRIMARY : 1 seul rôle coché (obligatoire).</li>
+              <li>SECONDARY : 0–2 max.</li>
+              <li>Par défaut : PRIMARY = RETURNS.</li>
+              <li>Si aucun PRIMARY → porte ≠ DONE.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- CORE -->
+      <section class="card core" id="core" data-section>
+        <header>
+          <div class="h">
+            <span class="tag"><svg><use href="#i-check"/></svg>[CORE]</span>
+            <span>Exécution</span>
+          </div>
+          <div class="sub">10–20 lignes max (impératif, preuves, STOP)</div>
+        </header>
+
+        <div class="body">
+          <ul>
+            <li><b>Objectif</b> : mettre en scène la voix (plan + hiérarchie), pas décorer.</li>
+            <li><b>Grande question</b> : l’espace prend-il la place du message (lead recule, diction floue, plans illisibles) ?</li>
+            <li><b>Contrat garanti</b> : si PASS, la lead reste devant, les couches restent derrière, et l’espace se ressent sans attirer l’attention. <a class="ref" href="#r3-04" data-tip="Centre sacré : la lead reste devant, l'espace se ressent sans voler le message.">[REF:R3-04]</a></li>
+            <li><b>Décision principale</b> : choisir un seul monde par section, puis doser via SEND/RETURN (pas “au hasard” partout).</li>
+            <li><b>Sortie attendue</b> : profondeur lisible (centre sacré), cohérence par section, throws choisis, groove intact. <a class="ref" href="#r3-16" data-tip="Cohérence inter-sections : un monde par section, sauf intention volontaire.">[REF:R3-16]</a></li>
+            <li><b>Interdits</b> : juger “mieux” parce que plus fort, empiler 5 espaces, utiliser la reverb pour “faire exister” la voix. <a class="ref" href="#r3-03" data-tip="Si la reverb sert à réparer la présence, rollback Phase 2.">[REF:R3-03]</a></li>
+            <li><b>LISTEN</b> : <span class="tag">[LISTEN:Plan]</span> <span class="tag">[LISTEN:Diction]</span> <span class="tag">[LISTEN:Groove]</span></li>
+            <li><b>Preuve</b> : A/B level-match (bypass) + A/B <span class="tag" data-tip="Kill-switch signature : coupe tous returns/throws pour vérifier que le dry tient.">[TOGGLE:SIG_OFF]</span> vs ON (level-match). <a class="ref" href="#r3-05" data-tip="Level-match obligatoire (sinon biais volume).">[REF:R3-05]</a> <a class="ref" href="#r3-02" data-tip="SIG_OFF vs ON est une preuve non-skippable pour DONE.">[REF:R3-02]</a></li>
+            <li><b>Dry doit tenir</b> : si la lead “tombe” quand SIG OFF, le problème est ailleurs → rollback Phase 2. <a class="ref" href="#r3-11" data-tip="Le dry doit tenir avant/après.">[REF:R3-11]</a> <a class="ref" href="#r3-03">[REF:R3-03]</a></li>
+            <li><b>Routing-first</b> : déclare où vit l’espace (1–2 returns fixes + throws) avant de toucher les réglages. <a class="ref" href="#r3-13" data-tip="Routing-first : d'abord où vit l'effet, ensuite seulement les paramètres.">[REF:R3-13]</a></li>
+          </ul>
+
+          <div class="hr"></div>
+
+          <table>
+            <tr>
+              <th style="width:220px;">Champ</th>
+              <th>Valeur</th>
+            </tr>
+            <tr>
+              <td><b>PATH_COMMIT</b></td>
+              <td>
+                <input id="core_path_commit" class="fill" placeholder="auto-rempli au COMMIT (ex: Plate luxe)">
+                <div class="hr"></div>
+                <div style="display:grid;grid-template-columns: 1fr 1fr; gap:10px;">
+                  <div><b>CROIX</b><input id="core_croix" class="fill" placeholder="auto-rempli (ex: moins rap ultra sec)"></div>
+                  <div><b>RISK_FOCUS</b><input id="core_risk_focus" class="fill" placeholder="auto-rempli (ex: diction noyée si non duckée)"></div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td><b>TARGET_PRIMARY</b></td>
+              <td><input id="core_target_primary" class="fill" placeholder="auto-rempli (ex: RETURNS)"></td>
+            </tr>
+            <tr>
+              <td><b>TARGET_SECONDARY</b></td>
+              <td><input id="core_target_secondary" class="fill" placeholder='auto-rempli ("Aucun" si vide)'></td>
+            </tr>
+            <tr>
+              <td><b>SCAN</b></td>
+              <td class="muted">plan avant/arrière → consonnes → fins de phrases → mono → groove (1 intention à la fois).</td>
+            </tr>
+            <tr>
+              <td><b>CONSTATS</b></td>
+              <td><input id="core_constats" class="fill" placeholder="1 phrase avant correction → NOTES—Porte (ou NOTES—OREILLE_NEUVE)"></td>
+            </tr>
+          </table>
+
+          <div class="hr"></div>
+
+          <div class="muted">
+            <b>Référence</b> (si utilisée) : preuve cadrée uniquement. <a class="ref" href="#r3-08" data-tip="Référence = preuve cadrée (pas de jugement global).">[REF:R3-08]</a><br/>
+            <b>Si OREILLE_NEUVE</b> déclenchée → NOTES—OREILLE_NEUVE<br/>
+            <b>Pauses/écoutes externes</b> = Intro Phase 3 (ne pas recopier).
+          </div>
+
+          <div class="hr"></div>
+
+          <div class="stop"><b>STOP</b> : si “mieux” seulement parce que plus fort → level-match → re-décide, sinon refuse. <a class="ref" href="#r3-05">[REF:R3-05]</a></div>
+          <div class="stop"><b>STOP</b> : si la lead recule → baisse l’espace (un levier) → re-test. <a class="ref" href="#r3-04">[REF:R3-04]</a></div>
+          <div class="stop"><b>STOP</b> : si la diction se noie → espace doit se retirer pendant la phrase (un levier) → re-test. <a class="ref" href="#r3-10">[REF:R3-10]</a></div>
+          <div class="stop"><b>STOP</b> : si mono rend le centre instable/creux → resserre ou remplace l’espace → re-test. <a class="ref" href="#r3-04">[REF:R3-04]</a></div>
+          <div class="stop"><b>STOP</b> : si l’écho casse le flow → simplifie ou retire → re-test. <a class="ref" href="#r3-10">[REF:R3-10]</a></div>
+        </div>
+      </section>
+
+      <!-- TESTS -->
+      <section class="card test" id="tests" data-section>
+        <header>
+          <div class="h">
+            <span class="tag">2) [TEST:ALWAYS]</span>
+            <span>Table PASS / FAIL / SKIP</span>
+          </div>
+          <div class="sub">20–40s / non-skippable pour “DONE” : SIG OFF vs ON</div>
+        </header>
+
+        <div class="body">
+          <table id="tests_table">
+            <tr>
+              <th>Test</th>
+              <th class="center">PASS</th>
+              <th class="center">FAIL</th>
+              <th class="center">SKIP</th>
+              <th>Raison (si SKIP)</th>
+            </tr>
+
+            <!-- Helper: Each test row is a radio group. JS reads the group value. -->
+            <tr data-kind="test-row" data-test="bas_volume">
+              <td>Bas volume</td>
+              <td class="center"><input id="t_bas_volume_pass" type="radio" name="test_bas_volume" value="PASS"></td>
+              <td class="center"><input id="t_bas_volume_fail" type="radio" name="test_bas_volume" value="FAIL"></td>
+              <td class="center"><input id="t_bas_volume_skip" type="radio" name="test_bas_volume" value="SKIP"></td>
+              <td><input id="t_bas_volume_reason" class="fill" placeholder="raison: ___"></td>
+            </tr>
+            <tr data-kind="test-row" data-test="mono">
+              <td>Mono</td>
+              <td class="center"><input id="t_mono_pass" type="radio" name="test_mono" value="PASS"></td>
+              <td class="center"><input id="t_mono_fail" type="radio" name="test_mono" value="FAIL"></td>
+              <td class="center"><input id="t_mono_skip" type="radio" name="test_mono" value="SKIP"></td>
+              <td><input id="t_mono_reason" class="fill" placeholder="raison: ___"></td>
+            </tr>
+            <tr data-kind="test-row" data-test="passage_dense">
+              <td>Passage dense</td>
+              <td class="center"><input id="t_dense_pass" type="radio" name="test_dense" value="PASS"></td>
+              <td class="center"><input id="t_dense_fail" type="radio" name="test_dense" value="FAIL"></td>
+              <td class="center"><input id="t_dense_skip" type="radio" name="test_dense" value="SKIP"></td>
+              <td><input id="t_dense_reason" class="fill" placeholder="raison: ___"></td>
+            </tr>
+            <tr data-kind="test-row" data-test="ab_bypass">
+              <td>A/B level-match (bypass) <a class="ref" href="#r3-05" data-tip="Level-match obligatoire (sinon biais volume).">[REF:R3-05]</a></td>
+              <td class="center"><input id="t_ab_bypass_pass" type="radio" name="test_ab_bypass" value="PASS"></td>
+              <td class="center"><input id="t_ab_bypass_fail" type="radio" name="test_ab_bypass" value="FAIL"></td>
+              <td class="center"><input id="t_ab_bypass_skip" type="radio" name="test_ab_bypass" value="SKIP"></td>
+              <td><input id="t_ab_bypass_reason" class="fill" placeholder="raison: ___"></td>
+            </tr>
+
+            <!-- REQUIRED: SIG OFF vs ON must not be SKIP -->
+            <tr data-kind="test-row" data-test="sig_ab" data-required="true">
+              <td><b>A/B [TOGGLE:SIG_OFF] vs ON (level-match)</b> ← FIXE / NON SKIPPABLE POUR “DONE” <a class="ref" href="#r3-02" data-tip="Non-skippable pour DONE : preuve kill-switch.">[REF:R3-02]</a></td>
+              <td class="center"><input id="t_sig_pass" type="radio" name="test_sig" value="PASS"></td>
+              <td class="center"><input id="t_sig_fail" type="radio" name="test_sig" value="FAIL"></td>
+              <td class="center"><input id="t_sig_skip" type="radio" name="test_sig" value="SKIP"></td>
+              <td><input id="t_sig_reason" class="fill" placeholder="raison: ___"></td>
+            </tr>
+
+            <!-- REQUIRED: PATH_COMMIT validé must not be SKIP -->
+            <tr data-kind="test-row" data-test="path_commit" data-required="true">
+              <td>PATH_COMMIT validé (A/B level-match) ← si SKIP → porte ≠ DONE</td>
+              <td class="center"><input id="t_path_commit_pass" type="radio" name="test_path_commit" value="PASS"></td>
+              <td class="center"><input id="t_path_commit_fail" type="radio" name="test_path_commit" value="FAIL"></td>
+              <td class="center"><input id="t_path_commit_skip" type="radio" name="test_path_commit" value="SKIP"></td>
+              <td><input id="t_path_commit_reason" class="fill" placeholder="raison: ___"></td>
+            </tr>
+
+            <tr>
+              <th colspan="5">Tests uniques P13</th>
+            </tr>
+
+            <tr data-kind="test-row" data-test="check0">
+              <td>Check 0 “mieux = plus fort ?” (return level-match)</td>
+              <td class="center"><input id="t_check0_pass" type="radio" name="test_check0" value="PASS"></td>
+              <td class="center"><input id="t_check0_fail" type="radio" name="test_check0" value="FAIL"></td>
+              <td class="center"><input id="t_check0_skip" type="radio" name="test_check0" value="SKIP"></td>
+              <td><input id="t_check0_reason" class="fill" placeholder="raison: ___"></td>
+            </tr>
+
+            <tr data-kind="test-row" data-test="lead_front">
+              <td>Lead reste au premier plan quand l’effet apparaît</td>
+              <td class="center"><input id="t_lead_front_pass" type="radio" name="test_lead_front" value="PASS"></td>
+              <td class="center"><input id="t_lead_front_fail" type="radio" name="test_lead_front" value="FAIL"></td>
+              <td class="center"><input id="t_lead_front_skip" type="radio" name="test_lead_front" value="SKIP"></td>
+              <td><input id="t_lead_front_reason" class="fill" placeholder="raison: ___"></td>
+            </tr>
+
+            <tr data-kind="test-row" data-test="diction">
+              <td>Diction (consonnes) lisible quand l’effet apparaît</td>
+              <td class="center"><input id="t_diction_pass" type="radio" name="test_diction" value="PASS"></td>
+              <td class="center"><input id="t_diction_fail" type="radio" name="test_diction" value="FAIL"></td>
+              <td class="center"><input id="t_diction_skip" type="radio" name="test_diction" value="SKIP"></td>
+              <td><input id="t_diction_reason" class="fill" placeholder="raison: ___"></td>
+            </tr>
+
+            <tr data-kind="test-row" data-test="fins">
+              <td>Fins de phrases propres (pas de nuage)</td>
+              <td class="center"><input id="t_fins_pass" type="radio" name="test_fins" value="PASS"></td>
+              <td class="center"><input id="t_fins_fail" type="radio" name="test_fins" value="FAIL"></td>
+              <td class="center"><input id="t_fins_skip" type="radio" name="test_fins" value="SKIP"></td>
+              <td><input id="t_fins_reason" class="fill" placeholder="raison: ___"></td>
+            </tr>
+
+            <tr data-kind="test-row" data-test="groove">
+              <td>Groove respecté (delay ne parasite pas)</td>
+              <td class="center"><input id="t_groove_pass" type="radio" name="test_groove" value="PASS"></td>
+              <td class="center"><input id="t_groove_fail" type="radio" name="test_groove" value="FAIL"></td>
+              <td class="center"><input id="t_groove_skip" type="radio" name="test_groove" value="SKIP"></td>
+              <td><input id="t_groove_reason" class="fill" placeholder="raison: ___"></td>
+            </tr>
+
+            <tr data-kind="test-row" data-test="coherence">
+              <td>Cohérence par section (pas de “changement de pièce” accidentel)</td>
+              <td class="center"><input id="t_coherence_pass" type="radio" name="test_coherence" value="PASS"></td>
+              <td class="center"><input id="t_coherence_fail" type="radio" name="test_coherence" value="FAIL"></td>
+              <td class="center"><input id="t_coherence_skip" type="radio" name="test_coherence" value="SKIP"></td>
+              <td><input id="t_coherence_reason" class="fill" placeholder="raison: ___"></td>
+            </tr>
+
+            <tr>
+              <th colspan="5">(si TARGET_PRIMARY ≠ LEAD) OU (TARGET_SECONDARY ≠ “Aucun”) : tests supports</th>
+            </tr>
+
+            <tr data-kind="test-row" data-test="mute_supports" data-support="true">
+              <td>Mute SUPPORTS</td>
+              <td class="center"><input id="t_mute_supports_pass" type="radio" name="test_mute_supports" value="PASS"></td>
+              <td class="center"><input id="t_mute_supports_fail" type="radio" name="test_mute_supports" value="FAIL"></td>
+              <td class="center"><input id="t_mute_supports_skip" type="radio" name="test_mute_supports" value="SKIP"></td>
+              <td><input id="t_mute_supports_reason" class="fill" placeholder="raison: ___"></td>
+            </tr>
+
+            <tr data-kind="test-row" data-test="mute_lead" data-support="true">
+              <td>Mute LEAD</td>
+              <td class="center"><input id="t_mute_lead_pass" type="radio" name="test_mute_lead" value="PASS"></td>
+              <td class="center"><input id="t_mute_lead_fail" type="radio" name="test_mute_lead" value="FAIL"></td>
+              <td class="center"><input id="t_mute_lead_skip" type="radio" name="test_mute_lead" value="SKIP"></td>
+              <td><input id="t_mute_lead_reason" class="fill" placeholder="raison: ___"></td>
+            </tr>
+
+            <tr data-kind="test-row" data-test="side_only" data-support="true">
+              <td>Side-only</td>
+              <td class="center"><input id="t_side_only_pass" type="radio" name="test_side_only" value="PASS"></td>
+              <td class="center"><input id="t_side_only_fail" type="radio" name="test_side_only" value="FAIL"></td>
+              <td class="center"><input id="t_side_only_skip" type="radio" name="test_side_only" value="SKIP"></td>
+              <td><input id="t_side_only_reason" class="fill" placeholder="raison: ___"></td>
+            </tr>
+          </table>
+
+          <div class="hr"></div>
+          <div class="muted">
+            <b>Règles</b>
+            <ul>
+              <li>PASS partout → ne rien ouvrir → HANDOFF + JOURNAL → porte suivante.</li>
+              <li>Si SIG OFF vs ON est SKIP → porte ≠ DONE.</li>
+              <li>Si PATH_COMMIT validé = SKIP → porte ≠ DONE.</li>
+              <li>Si tests supports requis et tous SKIP → porte ≠ DONE.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- 12) HANDOFF -->
+      <section class="card core" id="handoff" data-section>
+        <header>
+          <div class="h">
+            <span class="tag">12) HANDOFF</span>
+            <span>Sortie (3 lignes max)</span>
+          </div>
+          <div class="sub">Ce que tu “gèles” si PASS</div>
+        </header>
+
+        <div class="body">
+          <ul>
+            <li><b>ON/OFF</b> : monde d’espace déclaré ; returns contrôlables ; SIG OFF = preuve. <a class="ref" href="#r3-02">[REF:R3-02]</a></li>
+            <li><b>RISK_BADGE + trigger</b> (si fragile) : <input id="handoff_risk" class="fill" placeholder="______"> ; réouvrir seulement sur FAIL prouvé. <a class="ref" href="#r3-18">[REF:R3-18]</a></li>
+            <li><b>Next door</b> : lien vers P14 — Largeur / couches / architecture.</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Titre 4 repliés -->
+      <details class="card fail" id="redflags" data-section>
+        <summary>
+          <span class="sum-left">
+            <span class="tag"><svg><use href="#i-warn"/></svg>[IF:FAIL]</span>
+            <span>3) RED FLAGS (FAIL direct) — (Titre 4 replié)</span>
+          </span>
+          <svg class="chev"><use href="#i-chevron"/></svg>
+        </summary>
+        <div class="body">
+          <div style="padding: var(--pad);">
+            <ul>
+              <li>“Ça marche” seulement quand tu montes l’effet (return) → FAIL (biais de volume).</li>
+              <li>L’espace vole le premier plan (lead recule) → FAIL.</li>
+              <li>L’effet concurrence le texte (consonnes noyées) → FAIL.</li>
+              <li>Tails empilent les phrases (nuage permanent) → FAIL.</li>
+              <li>Le delay casse le groove → FAIL.</li>
+              <li>En mono, centre instable ou voix creuse → FAIL. <a class="ref" href="#r3-04">[REF:R3-04]</a></li>
+              <li>Tu ne peux pas décrire simplement “où est” la voix → FAIL.</li>
+              <li>Tu utilises l’espace comme béquille pour “faire exister” la lead → FAIL → rollback Phase 2. <a class="ref" href="#r3-03">[REF:R3-03]</a></li>
+            </ul>
+          </div>
+        </div>
+      </details>
+
+      <details class="card fail" id="sigfail" data-section>
+        <summary>
+          <span class="sum-left">
+            <span class="tag"><svg><use href="#i-warn"/></svg>[IF:FAIL]</span>
+            <span>4) SYMPTÔMES SIGNATURE → ACTION (RUN) — (Titre 4 replié)</span>
+          </span>
+          <svg class="chev"><use href="#i-chevron"/></svg>
+        </summary>
+        <div class="body">
+          <div style="padding: var(--pad);">
+            <h3 style="margin:0 0 8px;">A) Universels</h3>
+
+            <div class="stop">
+              <b>SYMPTÔME</b> : “mieux” seulement parce que plus fort (CHECK 0)<br/>
+              <b>CAUSE</b> : biais volume / effet non défendu à niveau réel<br/>
+              <b>ACTION</b> : level-match le return (un levier)<br/>
+              <b>RE-TEST</b> : A/B bypass (level-match) + Bas volume<br/>
+              <b>STOP</b> : si c’est mieux à niveau égal, sinon refuse <a class="ref" href="#r3-05">[REF:R3-05]</a>
+            </div>
+
+            <div class="stop">
+              <b>SYMPTÔME</b> : la lead recule dès que l’espace apparaît<br/>
+              <b>CAUSE</b> : trop d’espace sur le centre / plan avant-arrière non décidé<br/>
+              <b>ACTION</b> : réduire l’espace sur la lead (un levier)<br/>
+              <b>RE-TEST</b> : Lead au premier plan + Passage dense<br/>
+              <b>STOP</b> : si le centre redevient sacré <a class="ref" href="#r3-04">[REF:R3-04]</a>
+            </div>
+
+            <div class="stop">
+              <b>SYMPTÔME</b> : consonnes/syllabes se noient quand l’effet apparaît<br/>
+              <b>CAUSE</b> : timing d’effet qui parle pendant la phrase<br/>
+              <b>ACTION</b> : faire se retirer l’effet pendant la diction (un levier)<br/>
+              <b>RE-TEST</b> : Diction lisible + Passage dense<br/>
+              <b>STOP</b> : si la phrase reste nette <a class="ref" href="#r3-10">[REF:R3-10]</a>
+            </div>
+
+            <div class="stop">
+              <b>SYMPTÔME</b> : fins de phrases = nuage / phrases qui se collent<br/>
+              <b>CAUSE</b> : durée trop longue pour le débit / trop d’infos restent “en l’air”<br/>
+              <b>ACTION</b> : raccourcir l’espace (un levier)<br/>
+              <b>RE-TEST</b> : Fins propres + Passage dense<br/>
+              <b>STOP</b> : si les silences respirent
+            </div>
+
+            <div class="stop">
+              <b>SYMPTÔME</b> : fatigue rapide / “air” qui pique dans l’ambiance<br/>
+              <b>CAUSE</b> : trop de haut dans l’espace / l’effet attire l’attention<br/>
+              <b>ACTION</b> : assombrir l’espace (un levier)<br/>
+              <b>RE-TEST</b> : Bas volume + <span class="tag">[LISTEN:Plan]</span><br/>
+              <b>STOP</b> : si l’espace se ressent sans briller
+            </div>
+
+            <div class="stop">
+              <b>SYMPTÔME</b> : boue/voile ajouté par l’espace<br/>
+              <b>CAUSE</b> : bas et bas-médium dans le return<br/>
+              <b>ACTION</b> : enlever le bas de l’espace (un levier)<br/>
+              <b>RE-TEST</b> : Passage dense + Bas volume<br/>
+              <b>STOP</b> : si la clarté revient
+            </div>
+
+            <div class="stop">
+              <b>SYMPTÔME</b> : taille d’espace change phrase par phrase sans intention<br/>
+              <b>CAUSE</b> : décisions locales incohérentes / variations au hasard<br/>
+              <b>ACTION</b> : unifier l’espace par section (un levier)<br/>
+              <b>RE-TEST</b> : Cohérence section + A/B SIG OFF vs ON<br/>
+              <b>STOP</b> : si “un monde” tient <a class="ref" href="#r3-16">[REF:R3-16]</a> <a class="ref" href="#r3-02">[REF:R3-02]</a>
+            </div>
+
+            <div class="stop">
+              <b>SYMPTÔME</b> : l’écho parasite le flow / salit le groove<br/>
+              <b>CAUSE</b> : répétitions trop audibles ou mal placées<br/>
+              <b>ACTION</b> : simplifier les répétitions (un levier)<br/>
+              <b>RE-TEST</b> : Groove respecté + Passage dense<br/>
+              <b>STOP</b> : si le débit redevient net <a class="ref" href="#r3-10">[REF:R3-10]</a>
+            </div>
+
+            <div class="hr"></div>
+            <h3 style="margin:0 0 8px;">B) Spécifiques au PATH_COMMIT</h3>
+
+            <div class="stop">
+              <b>[PATH:Ultra dry]</b><br/>
+              SYMPTÔME : voix trop sèche / “dans ta tête” / pas de scène<br/>
+              CAUSE : aucun espace commun minimal<br/>
+              ACTION : ajouter un espace commun discret (un levier)<br/>
+              RE-TEST : Bas volume + Lead au premier plan<br/>
+              STOP : si la scène existe sans recul
+            </div>
+
+            <div class="stop">
+              <b>[PATH:Tight room]</b><br/>
+              SYMPTÔME : “pièce” boxy/nasale ou voile proche<br/>
+              CAUSE : early trop présent / résonance de pièce<br/>
+              ACTION : réduire la partie “collante” de l’espace (un levier)<br/>
+              RE-TEST : Diction + Passage dense<br/>
+              STOP : si ça colle sans colorer
+            </div>
+
+            <div class="stop">
+              <b>[PATH:Plate luxe]</b><br/>
+              SYMPTÔME : halo flatteur mais diction moins nette<br/>
+              CAUSE : queue trop présente pendant la phrase<br/>
+              ACTION : faire se retirer la plate pendant la diction (un levier)<br/>
+              RE-TEST : Diction + Fins propres<br/>
+              STOP : si le halo devient “ressenti” (pas entendu)
+            </div>
+
+            <div class="stop">
+              <b>[PATH:Hall cinematic / Signature]</b><br/>
+              SYMPTÔME : FX sujet / tails envahissantes / fatigue<br/>
+              CAUSE : ambition d’espace &gt; message<br/>
+              ACTION : rendre l’effet ponctuel ou secondaire (un levier)<br/>
+              RE-TEST : Lead au premier plan + Mono<br/>
+              STOP : si l’effet sert le film sans voler le texte <a class="ref" href="#r3-10">[REF:R3-10]</a>
+            </div>
+
+            <div class="stop">
+              <b>[PATH:Delay rythmique / Ping-pong wide]</b><br/>
+              SYMPTÔME : pattern plus mémorable que la phrase / mono fragile<br/>
+              CAUSE : motif trop dominant / largeur trop marquée<br/>
+              ACTION : réduire la dominance (un levier)<br/>
+              RE-TEST : Groove + Mono<br/>
+              STOP : si la topline gagne et le centre tient <a class="ref" href="#r3-04">[REF:R3-04]</a>
+            </div>
+
+            <div class="stop">
+              <b>[PATH:Convolution spéciale]</b><br/>
+              SYMPTÔME : monde incohérent / résonances qui accrochent<br/>
+              CAUSE : IR signature non au service<br/>
+              ACTION : refuser ou remplacer l’IR (un levier)<br/>
+              RE-TEST : Cohérence section + Passage dense<br/>
+              STOP : si “un monde” tient
+            </div>
+
+            <div class="hr"></div>
+            <h3 style="margin:0 0 8px;">C) Spécifiques au TARGET</h3>
+
+            <div class="stop">
+              SYMPTÔME : les backs/doubles deviennent trop “devant”<br/>
+              CAUSE : espace flatteur sur secondaires / plan arrière non assumé<br/>
+              ACTION : reculer les couches secondaires (un levier)<br/>
+              RE-TEST : Mute SUPPORTS + Passage dense<br/>
+              STOP : si le message reste au centre <a class="ref" href="#r3-04">[REF:R3-04]</a>
+            </div>
+
+            <div class="stop">
+              SYMPTÔME : les côtés paraissent plus proches que le centre<br/>
+              CAUSE : proximité perçue sur sides / profondeur mal répartie<br/>
+              ACTION : réduire la proximité des côtés (un levier)<br/>
+              RE-TEST : Side-only + Bas volume<br/>
+              STOP : si le centre redevient dominant <a class="ref" href="#r3-04">[REF:R3-04]</a>
+            </div>
+
+            <div class="stop">
+              SYMPTÔME : deux mondes (voix collée + ambiance lointaine)<br/>
+              CAUSE : écart direct/espace trop grand<br/>
+              ACTION : rapprocher l’espace du direct (un levier)<br/>
+              RE-TEST : Passage dense + <span class="tag">[LISTEN:Plan]</span><br/>
+              STOP : si la scène se colle sans reculer la lead
+            </div>
+
+            <div class="stop">
+              SYMPTÔME : en mono, la voix devient creuse à cause des returns<br/>
+              CAUSE : espace trop décorrélé / annulations<br/>
+              ACTION : remplacer par une version plus robuste (un levier)<br/>
+              RE-TEST : Mono + A/B SIG OFF vs ON<br/>
+              STOP : si mono reste acceptable <a class="ref" href="#r3-04">[REF:R3-04]</a> <a class="ref" href="#r3-02">[REF:R3-02]</a>
+            </div>
+          </div>
+        </div>
+      </details>
+
+      <details class="card fail" id="soclefail" data-section>
+        <summary>
+          <span class="sum-left">
+            <span class="tag"><svg><use href="#i-warn"/></svg>[IF:FAIL]</span>
+            <span>5) SYMPTÔMES SOCLE (retour Phase 2) → ACTION — (Titre 4 replié)</span>
+          </span>
+          <svg class="chev"><use href="#i-chevron"/></svg>
+        </summary>
+        <div class="body">
+          <div style="padding: var(--pad);">
+            <div class="stop">
+              <b>SYMPTÔME SOCLE</b> : tu utilises l’espace pour “faire exister” la voix<br/>
+              <b>CAUSE</b> : hiérarchie/place non résolue en amont<br/>
+              <b>ACTION</b> : réduire l’espace et accepter le vide (un levier)<br/>
+              <b>RE-TEST</b> : A/B SIG OFF vs ON + Bas volume<br/>
+              <b>STOP</b> : si la lead tient sans béquille, sinon rollback Phase 2 (P8/P9/P10) <a class="ref" href="#r3-03">[REF:R3-03]</a> <a class="ref" href="#r3-01">[REF:R3-01]</a>
+            </div>
+
+            <div class="stop">
+              <b>SYMPTÔME SOCLE</b> : la lead recule parce qu’elle manque de présence (même sans FX)<br/>
+              <b>CAUSE</b> : place/contrôle pas verrouillés en Phase 2<br/>
+              <b>ACTION</b> : rollback Phase 2 sur la cause prouvée (un levier)<br/>
+              <b>RE-TEST</b> : Bas volume + Passage dense<br/>
+              <b>STOP</b> : si dry/SIG OFF tient, puis retour P13 <a class="ref" href="#r3-01">[REF:R3-01]</a> <a class="ref" href="#r3-11">[REF:R3-11]</a>
+            </div>
+
+            <div class="stop">
+              <b>SYMPTÔME SOCLE</b> : sibilance/harsh réapparaît surtout “dans l’air”<br/>
+              <b>CAUSE</b> : contrôle amont fragile, l’espace expose les défauts<br/>
+              <b>ACTION</b> : rollback Phase 2 sur contrôle (un levier)<br/>
+              <b>RE-TEST</b> : Passage dense + Bas volume<br/>
+              <b>STOP</b> : si la base tient, puis retour P13 <a class="ref" href="#r3-01">[REF:R3-01]</a> <a class="ref" href="#r3-06">[REF:R3-06]</a>
+            </div>
+          </div>
+        </div>
+      </details>
+
+      <details class="card tech" id="listen" data-section>
+        <summary>
+          <span class="sum-left">
+            <span class="tag">[LISTEN]</span>
+            <span>6) LISTEN PANELS — (Titre 4 replié)</span>
+          </span>
+          <svg class="chev"><use href="#i-chevron"/></svg>
+        </summary>
+        <div class="body">
+          <div style="padding: var(--pad);">
+            <div class="stop">
+              <b>[LISTEN:Plan]</b><br/>
+              But : entendre “centre devant / couches derrière” en une phrase.<br/>
+              Symptômes : hésitation, scène confuse, côtés trop proches, deux mondes.<br/>
+              1 levier : unifier le monde par section OU resserrer la largeur.<br/>
+              Re-test : Mono + Lead au premier plan.<br/>
+              STOP : si tu peux décrire le plan simplement.
+            </div>
+            <div class="stop">
+              <b>[LISTEN:Diction]</b><br/>
+              But : consonnes intactes quand l’espace apparaît.<br/>
+              Symptômes : syllabes noyées, attaques mangées, S deviennent événements.<br/>
+              1 levier : faire se retirer l’effet pendant la phrase (duck/timing) OU séparer le direct.<br/>
+              Re-test : Passage dense + Diction lisible.<br/>
+              STOP : si la phrase reste nette.
+            </div>
+            <div class="stop">
+              <b>[LISTEN:Groove]</b><br/>
+              But : delay/throws renforcent le débit sans parasiter.<br/>
+              Symptômes : écho “répond” au mauvais endroit, pattern domine.<br/>
+              1 levier : simplifier les répétitions OU rendre le delay plus discret.<br/>
+              Re-test : Passage dense + Groove respecté.<br/>
+              STOP : si le flow redevient évident.
+            </div>
+            <div class="muted"><b>[OPT] LISTEN SCAN</b> : Plan → Diction → Fins → Mono → Groove</div>
+          </div>
+        </div>
+      </details>
+
+      <details class="card tech" id="techpack" data-section>
+        <summary>
+          <span class="sum-left">
+            <span class="tag">TECH</span>
+            <span>7) TECH PACK — (Titre 4 replié)</span>
+          </span>
+          <svg class="chev"><use href="#i-chevron"/></svg>
+        </summary>
+        <div class="body">
+          <div style="padding: var(--pad);">
+            <h3 style="margin:0 0 8px;">A) TECH PACK — GÉNÉRAL P13</h3>
+            <ul>
+              <li>P13 = mise en scène : reverb/delay positionnent et hiérarchisent, ils ne décorent pas.</li>
+              <li>Un bon espace se ressent sans attirer l’attention ; si tu l’entends d’abord, il est trop présent. <a class="ref" href="#r3-10" data-tip="Si l'FX devient le sujet → recadrage.">[REF:R3-10]</a></li>
+              <li>Principe : SEND/RETURN par défaut (dosage, cohérence, automation, EQ/duck sur l’effet sans toucher au dry). <a class="ref" href="#r3-13">[REF:R3-13]</a></li>
+              <li>Insert uniquement si “design” assumé ; sinon risque de voler le message. <a class="ref" href="#r3-10">[REF:R3-10]</a></li>
+              <li>Système minimal : 1 espace commun + 1 espace d’accent (throws).</li>
+              <li>Check 0 anti-biais : d’abord return level-match, ensuite paramètres. <a class="ref" href="#r3-05">[REF:R3-05]</a></li>
+              <li>Filtrage returns : enlever bas, calmer haut ; sinon boue/fizz et fatigue. <a class="ref" href="#r3-06">[REF:R3-06]</a></li>
+              <li>Si les “S” vivent dans l’ambiance : traiter le return plutôt que tuer la lead. <a class="ref" href="#r3-10">[REF:R3-10]</a></li>
+              <li>Centre sacré : décorrélation qui casse le centre = FAIL (mono/instabilité). <a class="ref" href="#r3-04">[REF:R3-04]</a></li>
+              <li>Tempo/groove : delay doit tomber “dans le film”. <a class="ref" href="#r3-10">[REF:R3-10]</a></li>
+              <li>Cohérence : un seul monde par section ; changements accidentels = recadrage. <a class="ref" href="#r3-16">[REF:R3-16]</a></li>
+              <li>Stutter delay : “scène/throw” = P13 ; “moteur rythmique/perf” = P15.</li>
+              <li>Si tu ne sais pas pourquoi tu ajoutes de l’espace, n’en ajoute pas. <a class="ref" href="#r3-09">[REF:R3-09]</a></li>
+            </ul>
+
+            <div class="hr"></div>
+            <div class="muted">
+              <b>[PARAMS:HIDDEN] Repères concrets (retours FX)</b>
+              <ul>
+                <li>Filtrage return : couper bas + calmer haut ; possible creux bas-médium si voile.</li>
+                <li>Pré-delay : colle vs séparation (plus séparé = plus audible).</li>
+                <li>Decay/feedback : débit rapide → plus court ; lent → peut respirer mais ducking devient prioritaire.</li>
+                <li>Diffusion/width : plus lisse vs plus granuleux ; lead tolère une largeur modérée (centre prioritaire).</li>
+                <li>Combo robuste : reverb plus centrée + delay plus large (profondeur + largeur sans flouter le centre).</li>
+                <li>Chaîne return : filtre → contrôle agressivité → contrôle dynamique/duck → (option) couleur → width/MS.</li>
+              </ul>
+            </div>
+
+            <div class="hr"></div>
+
+            <h3 style="margin:0 0 8px;">B) TECH PACK — Preset PATH:</h3>
+
+            <h4 id="tech-path-ultradry">Preset PATH:Ultra dry</h4>
+            <ul>
+              <li>Intention : impact, docu, texte au front.</li>
+              <li>Risque : plat / voix “dans la tête”.</li>
+              <li>Checkpoint : espace commun minimal, discret, mono safe.</li>
+              <li>Throws : rares, choisis.</li>
+            </ul>
+
+            <h4 id="tech-path-tightroom">Preset PATH:Tight room</h4>
+            <ul>
+              <li>Intention : “dans la pièce”, colle sans queue longue.</li>
+              <li>Risque : boxy/voile si ER trop présents.</li>
+              <li>Checkpoint : diction intacte en passage dense.</li>
+            </ul>
+
+            <h4 id="tech-path-plateluxe">Preset PATH:Plate luxe</h4>
+            <ul>
+              <li>Intention : halo dense moderne, classy.</li>
+              <li>Risque : couvre la diction si non ducké/timé.</li>
+              <li>Checkpoint : consonnes + fins propres.</li>
+            </ul>
+
+            <h4 id="tech-path-chamber">Preset PATH:Chamber</h4>
+            <ul>
+              <li>Intention : naturel + profondeur élégante.</li>
+              <li>Risque : flou si trop long.</li>
+              <li>Checkpoint : cohérence section + bas volume.</li>
+            </ul>
+
+            <h4 id="tech-path-hall">Preset PATH:Hall cinematic</h4>
+            <ul>
+              <li>Intention : grand écran / profondeur.</li>
+              <li>Risque : tails envahissantes, FX sujet, lead recule.</li>
+              <li>Checkpoint : centre sacré + mono.</li>
+            </ul>
+
+            <h4 id="tech-path-slapback">Preset PATH:Slapback</h4>
+            <ul>
+              <li>Intention : épaisseur/vibe, présence.</li>
+              <li>Risque : répétition audible, groove perturbé.</li>
+              <li>Checkpoint : groove + diction.</li>
+            </ul>
+
+            <h4 id="tech-path-delay">Preset PATH:Delay rythmique</h4>
+            <ul>
+              <li>Intention : bounce, réponse rythmique.</li>
+              <li>Risque : pattern domine, masque texte si non contrôlé.</li>
+              <li>Checkpoint : passage dense + “phrase gagne”.</li>
+            </ul>
+
+            <h4 id="tech-path-pingpong">Preset PATH:Ping-pong wide</h4>
+            <ul>
+              <li>Intention : scène large, mouvement.</li>
+              <li>Risque : mono/corrélation, centre instable.</li>
+              <li>Checkpoint : mono + centre stable.</li>
+            </ul>
+
+            <h4 id="tech-path-throws">Preset PATH:Throws/Multi-tap</h4>
+            <ul>
+              <li>Intention : ponctuation (mot-clé, fin de phrase).</li>
+              <li>Risque : gimmick répétitif / incohérence monde.</li>
+              <li>Checkpoint : cohérence section + groove.</li>
+            </ul>
+
+            <h4 id="tech-path-signature">Preset PATH:Signature</h4>
+            <ul>
+              <li>Intention : reverse/gated/shimmer/blackhole = signature assumée.</li>
+              <li>Risque : fatigue, mono, FX sujet.</li>
+              <li>Checkpoint : ponctuel + secondaire + centre sacré. <a class="ref" href="#r3-10">[REF:R3-10]</a> <a class="ref" href="#r3-04">[REF:R3-04]</a></li>
+            </ul>
+
+            <h4 id="tech-path-convolution">Preset PATH:Convolution spéciale</h4>
+            <ul>
+              <li>Intention : IR atypiques pour un monde unique.</li>
+              <li>Risque : résonances IR / monde incohérent.</li>
+              <li>Checkpoint : cohérence section + passage dense.</li>
+            </ul>
+
+            <div class="hr"></div>
+
+            <h3 style="margin:0 0 8px;" id="tech-target-p13">C) TECH PACK — Preset TARGET:P13</h3>
+            <ul>
+              <li>RETURNS = point de contrôle : filtre + contrôle dynamique sur returns, pas sur le dry.</li>
+              <li>LEAD : sends dosés ; priorité au plan (devant), pas à “beau”. <a class="ref" href="#r3-04">[REF:R3-04]</a></li>
+              <li>DOUBLES/BACKS : plus loin = plus d’espace mais plus sombre et moins intelligible. <a class="ref" href="#r3-04">[REF:R3-04]</a></li>
+              <li>ADLIBS/CHOPS : throws ponctuels ; éviter gimmick constant. <a class="ref" href="#r3-10">[REF:R3-10]</a></li>
+              <li>BUS VOCAL/MIXBUS : rare ; si utilisé, déclarer et tester cumul invisible. <a class="ref" href="#r3-12">[REF:R3-12]</a> <a class="ref" href="#r3-13">[REF:R3-13]</a></li>
+            </ul>
+          </div>
+        </div>
+      </details>
+
+      <details class="card bus" id="busmap" data-section>
+        <summary>
+          <span class="sum-left">
+            <span class="tag">BUS</span>
+            <span>8) [BUSMAP:P13] — (Titre 4 replié)</span>
+          </span>
+          <svg class="chev"><use href="#i-chevron"/></svg>
+        </summary>
+        <div class="body">
+          <div style="padding: var(--pad);">
+            <b>[BUSMAP:P13]</b><br/>
+            <div class="muted">Schéma minimal</div>
+            <ul>
+              <li>1 BUS REVERB (espace commun)</li>
+              <li>1 BUS DELAY (scène/largeur)</li>
+              <li>(Option) 1 BUS THROWS (accents ponctuels)</li>
+            </ul>
+            <div class="muted"><b>Règles</b></div>
+            <ul>
+              <li>Sends post-fader par défaut ; pré-fader seulement si intention.</li>
+              <li>Contrôle = d’abord return, ensuite send, puis paramètres. <a class="ref" href="#r3-05">[REF:R3-05]</a></li>
+              <li>ON/OFF attendu : SIG OFF coupe tous returns + throws ; SIG ON active uniquement returns commit + automation déclarée. <a class="ref" href="#r3-02">[REF:R3-02]</a></li>
+            </ul>
+            <div class="muted"><b>Décision d’ordre “moteur vs tails” (prépare P15)</b></div>
+            <ul>
+              <li>Si tu veux hacher le dry sans hacher les tails → prendre les sends avant le moteur.</li>
+              <li>Si tu veux hacher aussi les tails → moteur sur bus vocal ou sur returns. <a class="ref" href="#r3-13">[REF:R3-13]</a></li>
+            </ul>
+          </div>
+        </div>
+      </details>
+
+      <details class="card tech" id="depends" data-section>
+        <summary>
+          <span class="sum-left">
+            <span class="tag">⚠</span>
+            <span>10) DEPENDS / REOPENS — (Titre 4 replié)</span>
+          </span>
+          <svg class="chev"><use href="#i-chevron"/></svg>
+        </summary>
+        <div class="body">
+          <div style="padding: var(--pad);">
+            <ul>
+              <li>⚠ [DEPENDS_ON:P11] : si le “personnage” change sans intention (monde d’espace incohérent), recadrer. <a class="ref" href="#r3-16">[REF:R3-16]</a></li>
+              <li>⚠ [DEPENDS_ON:P8] : si la place/hiérarchie n’est pas gagnée, P13 devient béquille. <a class="ref" href="#r3-03">[REF:R3-03]</a></li>
+              <li>⚠ [DEPENDS_ON:P10] : si sibilance/harsh fragile, l’espace expose et fatigue. <a class="ref" href="#r3-06">[REF:R3-06]</a></li>
+              <li>⚠ [REOPENS:P13] : si P15/P16 révèle : lead recule, nuage, groove cassé, mono instable → re-test P13. <a class="ref" href="#r3-07">[REF:R3-07]</a></li>
+            </ul>
+            <div class="muted">
+              Triggers : FAIL prouvé sur Check 0 / Lead plan / Diction / Fins / Groove / Mono / Cohérence section.
+            </div>
+          </div>
+        </div>
+      </details>
+
+      <details class="card tech" id="checkpoints" data-section>
+        <summary>
+          <span class="sum-left">
+            <span class="tag">CHK</span>
+            <span>11) CHECKPOINTS — (Titre 4 replié)</span>
+          </span>
+          <svg class="chev"><use href="#i-chevron"/></svg>
+        </summary>
+        <div class="body">
+          <div style="padding: var(--pad);">
+            <ul>
+              <li><b>Quand</b> : si PATH = Hall/Signature/Ping-pong/Convolution OU si throws multiples.</li>
+              <li><b>ON/OFF</b> : liste des returns actifs + automation déclarée + test SIG OFF. <a class="ref" href="#r3-02">[REF:R3-02]</a></li>
+              <li><b>RISK_BADGE + trigger</b> : <input id="checkpoint_risk" class="fill" placeholder="______"> + “réouvrir seulement sur FAIL prouvé”. <a class="ref" href="#r3-18">[REF:R3-18]</a></li>
+              <li><b>Preuve à conserver</b> : A/B bypass + A/B SIG OFF vs ON (level-match). <a class="ref" href="#r3-05">[REF:R3-05]</a></li>
+            </ul>
+          </div>
+        </div>
+      </details>
+
+      <details class="card tech" id="notes" data-section>
+        <summary>
+          <span class="sum-left">
+            <span class="tag">NOTES</span>
+            <span>13) NOTES — Porte (SCOPE=door) — (Titre 4 replié)</span>
+          </span>
+          <svg class="chev"><use href="#i-chevron"/></svg>
+        </summary>
+        <div class="body">
+          <div style="padding: var(--pad);">
+            <table>
+              <tr>
+                <th style="width:200px;">Champ</th>
+                <th>Texte</th>
+              </tr>
+              <tr>
+                <td>TRIAL</td>
+                <td><input id="notes_trial_1" class="fill" placeholder="+apport / -casse (1 phrase)"></td>
+              </tr>
+              <tr>
+                <td>TRIAL</td>
+                <td><input id="notes_trial_2" class="fill" placeholder="+apport / -casse (1 phrase)"></td>
+              </tr>
+              <tr>
+                <td>CONSTATS</td>
+                <td><input id="notes_constats" class="fill" placeholder="1 phrase"></td>
+              </tr>
+              <tr>
+                <td>Après COMMIT</td>
+                <td class="muted">chaque correction référence RISK_FOCUS ou CROIX (sinon FAIL).</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </details>
+
+      <details class="card tech" id="journal" data-section>
+        <summary>
+          <span class="sum-left">
+            <span class="tag">LOG</span>
+            <span>14) JOURNAL — 1 ligne minimum — (Titre 4 replié)</span>
+          </span>
+          <svg class="chev"><use href="#i-chevron"/></svg>
+        </summary>
+        <div class="body">
+          <div style="padding: var(--pad);">
+            <table>
+              <tr>
+                <th>Date</th>
+                <th>Porte</th>
+                <th>PATH_COMMIT</th>
+                <th>TARGET_PRIMARY</th>
+                <th>Action</th>
+                <th>Résultat</th>
+                <th>NEEDS_RETEST</th>
+                <th>RISK_BADGE</th>
+              </tr>
+              <tr>
+                <td><input id="journal_date" class="fill" placeholder="YYYY-MM-DD"></td>
+                <td>P13</td>
+                <td><input id="journal_path" class="fill" placeholder="..."></td>
+                <td><input id="journal_target" class="fill" placeholder="..."></td>
+                <td><input id="journal_action" class="fill" placeholder="1 levier"></td>
+                <td><input id="journal_result" class="fill" placeholder="PASS/FAIL"></td>
+                <td><input id="journal_needs" class="fill" placeholder="oui/non"></td>
+                <td><input id="journal_risk" class="fill" placeholder="..."></td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </details>
+
+      <!-- R3 refs -->
+      <section class="card tech" id="r3" data-section>
+        <header>
+          <div class="h">
+            <span class="tag">[REF]</span>
+            <span>Ancres R3 (stubs)</span>
+          </div>
+          <div class="sub">Juste pour que les liens [REF:R3-xx] soient cliquables ici</div>
+        </header>
+        <div class="body muted">
+          <div id="r3-01"><span class="ref" data-tip="PH2_LOCKED sacré / rollback.">[REF:R3-01]</span> PH2_LOCKED sacré / rollback.</div>
+          <div id="r3-02"><span class="ref" data-tip="Kill-switch SIG_OFF + preuve A/B.">[REF:R3-02]</span> Kill-switch SIG_OFF + preuve A/B.</div>
+          <div id="r3-03"><span class="ref" data-tip="Si ajout = réparer → retour Phase 2.">[REF:R3-03]</span> Si ajout = réparer → retour Phase 2.</div>
+          <div id="r3-04"><span class="ref" data-tip="Centre sacré / lead devant.">[REF:R3-04]</span> Centre sacré / lead devant.</div>
+          <div id="r3-05"><span class="ref" data-tip="Level-match obligatoire.">[REF:R3-05]</span> Level-match obligatoire.</div>
+          <div id="r3-06"><span class="ref" data-tip="Zones à risque (fatigue/sibilance/harsh).">[REF:R3-06]</span> Zones à risque (fatigue/sibilance/harsh).</div>
+          <div id="r3-07"><span class="ref" data-tip="Après COMMIT, réouverture sur FAIL prouvé.">[REF:R3-07]</span> Porte validée = gelée ; réouverture sur FAIL prouvé.</div>
+          <div id="r3-08"><span class="ref" data-tip="Référence = preuve cadrée uniquement.">[REF:R3-08]</span> Référence = preuve cadrée uniquement.</div>
+          <div id="r3-09"><span class="ref" data-tip="1 intention = 1 geste = stop.">[REF:R3-09]</span> 1 intention = 1 geste = stop.</div>
+          <div id="r3-10"><span class="ref" data-tip="FX devient le sujet → recadrage.">[REF:R3-10]</span> FX devient le sujet → recadrage.</div>
+          <div id="r3-11"><span class="ref" data-tip="Dry doit tenir avant/après.">[REF:R3-11]</span> Dry doit tenir avant/après.</div>
+          <div id="r3-12"><span class="ref" data-tip="Cumul invisible interdit.">[REF:R3-12]</span> Cumul invisible interdit.</div>
+          <div id="r3-13"><span class="ref" data-tip="Routing-first : où vit l’effet.">[REF:R3-13]</span> Routing-first : où vit l’effet.</div>
+          <div id="r3-16"><span class="ref" data-tip="Cohérence inter-sections.">[REF:R3-16]</span> Cohérence inter-sections.</div>
+          <div id="r3-18"><span class="ref" data-tip="Fragile = badge + trigger + micro-checkpoint.">[REF:R3-18]</span> Fragile = RISK_BADGE + trigger + micro-checkpoint.</div>
+        </div>
+      </section>

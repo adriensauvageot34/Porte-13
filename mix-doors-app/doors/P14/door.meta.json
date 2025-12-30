@@ -1,0 +1,8 @@
+{
+  "id": "P14",
+  "title": "Porte P14 — Placeholder",
+  "intent": "Remplir ce pack pour activer la porte.",
+  "prev": "P13",
+  "next": "P15",
+  "version": "0.0.1"
+}

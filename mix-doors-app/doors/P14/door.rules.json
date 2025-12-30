@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "policies": {
+    "trial": false,
+    "commit": false,
+    "primaryRequired": false,
+    "secondaryAllowed": false,
+    "supportsRequired": false
+  },
+  "gates": [],
+  "toggles": [],
+  "targets": {
+    "primary": [],
+    "secondary": []
+  }
+}

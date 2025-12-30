@@ -1,0 +1,4 @@
+/* Overrides spécifiques à P13 */
+section.card.fail {
+  border-color: #ff9a58;
+}

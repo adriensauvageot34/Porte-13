@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "policies": {
+    "trial": true,
+    "commit": true,
+    "primaryRequired": true,
+    "secondaryAllowed": true,
+    "supportsRequired": true
+  },
+  "gates": [
+    {"type": "field", "path": "path.commit", "label": "Commit path"},
+    {"type": "testRequired", "testId": "sig_ab"},
+    {"type": "testRequired", "testId": "returns"}
+  ],
+  "toggles": ["SIG_OFF", "CTRL_OFF"],
+  "targets": {
+    "primary": ["RETURNS", "DEPTH", "SENDS"],
+    "secondary": ["CTRL", "DRYNESS", "PERC", "VOICE"]
+  }
+}

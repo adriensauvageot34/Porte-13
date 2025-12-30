@@ -1,0 +1,2 @@
+.card header { display:flex; flex-direction:column; gap:4px; margin-bottom:8px; }
+.card .tag { font-size:12px; text-transform:uppercase; letter-spacing:0.02em; }
