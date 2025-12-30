@@ -610,6 +610,10 @@ html = r'''<!doctype html>
     <symbol id="i-search" viewBox="0 0 24 24">
       <path fill="currentColor" d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16a6.47 6.47 0 0 0 4.23-1.57l.27.28v.79L20 21.5 21.5 20 15.5 14zM9.5 14C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
     </symbol>
+    <symbol id="i-gear" viewBox="0 0 24 24">
+      <path fill="currentColor" d="M12 9.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5Z"/>
+      <path fill="currentColor" d="M4.5 13.5v-3l2.1-.7a6 6 0 0 1 1.1-2.1L7 5l3-1.5 1.2 2a6 6 0 0 1 2.6 0l1.2-2L18 5l-.7 2.7a6 6 0 0 1 1.1 2.1l2.1.7v3l-2.1.7a6 6 0 0 1-1.1 2.1L18 19l-3 1.5-1.2-2a6 6 0 0 1-2.6 0l-1.2 2L7 19l.7-2.7a6 6 0 0 1-1.1-2.1Z"/>
+    </symbol>
     <symbol id="i-next" viewBox="0 0 24 24">
       <path fill="currentColor" d="M8 5v14l11-7L8 5z"/>
     </symbol>
@@ -637,6 +641,7 @@ html = r'''<!doctype html>
         <a href="#p13" data-nav="p13">🧭 PORTE P13 — Espace <span class="pill core"><svg><use href="#i-compass"/></svg>T2</span></a>
 
         <a href="#state" data-nav="state">0) [STATE] — Bandeau d’état <span class="pill state">T3</span></a>
+        <a href="#workflow" data-nav="workflow">0bis) GUIDE FLUX <span class="pill tech">T2</span></a>
         <a href="#path" data-nav="path">1) PATH PICKER <span class="pill path">T3</span></a>
         <a href="#target" data-nav="target">1bis) TARGET PICKER <span class="pill target">T3</span></a>
         <a href="#core" data-nav="core">[CORE] — Exécution <span class="pill core">T3</span></a>
@@ -668,6 +673,26 @@ html = r'''<!doctype html>
         <h1>🧭 PORTE P13 — Espace (reverb / delay / profondeur)</h1>
         <div class="meta">Mockup “app-like” : cartes, tables cochables, sections repliables (≃ Titre 4 Word). — <b>Tout est sauvegardé automatiquement</b> (localStorage).</div>
       </div>
+
+      <!-- 0bis) GUIDE RAPIDE -->
+      <section class="card tech" id="workflow" data-section>
+        <header>
+          <div class="h">
+            <span class="tag"><svg><use href="#i-gear"/></svg>0bis) GUIDE RAPIDE</span>
+            <span>Ne pas se perdre dans la porte</span>
+          </div>
+          <div class="sub">Micro-checklist pour sécuriser tes étapes</div>
+        </header>
+        <div class="body">
+          <ul>
+            <li><b>Commence par verrouiller PATH/TARGET</b> : choisis un chemin primaire dans <a href="#path">PATH PICKER</a> puis le couple primaire/secondaire dans <a href="#target">TARGET PICKER</a> avant d’ouvrir d’autres blocs.</li>
+            <li><b>Utilise les états bloquants</b> : passe par le bloc <a href="#tests">[TEST:ALWAYS]</a> pour cocher les tests obligatoires ; la barre de progression et le bouton <i>Done</i> se mettent à jour automatiquement.</li>
+            <li><b>Active les toggles “STOP” si doute</b> : bascule <code>[TOGGLE:SIG_OFF]</code> ou <code>[TOGGLE:CTRL_OFF]</code> dans <a href="#state">STATE</a> avant de modifier des écoutes pour éviter un run incohérent.</li>
+            <li><b>Raccourcis et navigation</b> : Ctrl+K ouvre la palette de commandes, et la navigation latérale suit ton scroll (highlight auto) pour revenir vite aux sections critiques.</li>
+            <li><b>Prends des notes rapides</b> : journalise les essais dans <a href="#journal">JOURNAL</a> ; tout est auto-sauvegardé (localStorage) pour ne pas reperdre le contexte.</li>
+          </ul>
+        </div>
+      </section>
 
       <!-- 0) STATE -->
       <section class="card state" id="state" data-section>
