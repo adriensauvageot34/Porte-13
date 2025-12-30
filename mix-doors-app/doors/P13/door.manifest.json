@@ -1,0 +1,23 @@
+{
+  "t3Order": ["state", "workflow", "path", "target", "core", "tests", "handoff"],
+  "sections": [
+    {"id": "workflow", "label": "0bis) GUIDE RAPIDE", "level": "T2", "collapsible": false, "kind": "tech"},
+    {"id": "state", "label": "0) [STATE]", "level": "T3", "collapsible": false, "kind": "state"},
+    {"id": "path", "label": "1) PATH PICKER", "level": "T3", "collapsible": false, "kind": "path"},
+    {"id": "target", "label": "1bis) TARGET PICKER", "level": "T3", "collapsible": false, "kind": "target"},
+    {"id": "core", "label": "[CORE] — Exécution", "level": "T3", "collapsible": false, "kind": "core"},
+    {"id": "tests", "label": "2) [TEST:ALWAYS]", "level": "T3", "collapsible": false, "kind": "test"},
+    {"id": "handoff", "label": "12) HANDOFF", "level": "T3", "collapsible": false, "kind": "core"},
+    {"id": "redflags", "label": "3) [IF:FAIL] RED FLAGS", "level": "T4", "collapsible": true, "kind": "fail"},
+    {"id": "sigfail", "label": "4) SYMPTÔMES SIGNATURE", "level": "T4", "collapsible": true, "kind": "fail"},
+    {"id": "soclefail", "label": "5) SYMPTÔMES SOCLE", "level": "T4", "collapsible": true, "kind": "fail"},
+    {"id": "listen", "label": "6) LISTEN PANELS", "level": "T4", "collapsible": true, "kind": "tech"},
+    {"id": "techpack", "label": "7) TECH PACK", "level": "T4", "collapsible": true, "kind": "tech"},
+    {"id": "busmap", "label": "8) BUSMAP", "level": "T4", "collapsible": true, "kind": "bus"},
+    {"id": "depends", "label": "10) DEPENDS / REOPENS", "level": "T4", "collapsible": true, "kind": "tech"},
+    {"id": "checkpoints", "label": "11) CHECKPOINTS", "level": "T4", "collapsible": true, "kind": "tech"},
+    {"id": "notes", "label": "13) NOTES — Porte", "level": "T4", "collapsible": true, "kind": "tech"},
+    {"id": "journal", "label": "14) JOURNAL", "level": "T4", "collapsible": true, "kind": "tech"},
+    {"id": "r3", "label": "[REF] R3", "level": "DOC", "collapsible": true, "kind": "doc"}
+  ]
+}

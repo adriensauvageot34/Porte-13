@@ -1,0 +1,23 @@
+[
+  {
+    "id": "sig_ab",
+    "label": "Signature A/B est cohérente",
+    "groupKey": "sig",
+    "required": true,
+    "category": "ALWAYS"
+  },
+  {
+    "id": "returns",
+    "label": "Les returns sont câblés et contrôlables",
+    "groupKey": "returns",
+    "required": true,
+    "category": "ALWAYS"
+  },
+  {
+    "id": "delay_time",
+    "label": "Temps de delay ajusté",
+    "groupKey": "delay",
+    "required": false,
+    "category": "SUPPORT"
+  }
+]
