@@ -25,7 +25,13 @@ async function bootstrap() {
   const persisted = loadState(door.meta.id, store.state.runId);
   if (persisted) store.hydrate(persisted);
 
-  renderLayout({ meta: door.meta, manifest: door.manifest, contentHtml: door.contentHtml, resourcesHtml: door.resourcesHtml });
+  renderLayout({
+    meta: door.meta,
+    manifest: door.manifest,
+    contentHtml: door.contentHtml,
+    resourcesHtml: door.resourcesHtml,
+    tests: door.tests
+  });
   mountRunBar(door.rules, store);
   enableTooltips();
   mountCommandPalette();
@@ -36,10 +42,12 @@ async function bootstrap() {
     const update = () => {
       const value = store.get(path);
       if (type === 'checkbox') input.checked = Boolean(value);
+      else if (type === 'radio') input.checked = input.value === value;
       else input.value = value || '';
     };
     update();
     input.addEventListener('change', (e) => {
+      if (type === 'radio' && !e.target.checked) return;
       const val = type === 'checkbox' ? e.target.checked : e.target.value;
       if (path.startsWith('tests.')) {
         const [, testId, field] = path.split('.');
