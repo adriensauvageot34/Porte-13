@@ -1,2 +1,71 @@
-.card header { display:flex; flex-direction:column; gap:4px; margin-bottom:8px; }
-.card .tag { font-size:12px; text-transform:uppercase; letter-spacing:0.02em; }
+.card {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.015), transparent), var(--card);
+  padding: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  box-shadow: var(--shadow-soft);
+}
+
+.card header {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.card header .h {
+  display: flex;
+  gap: var(--space-2);
+  align-items: center;
+  flex-wrap: wrap;
+  font-size: 15px;
+}
+
+.card header .sub {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.card .body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.card .hr {
+  margin: var(--space-2) 0;
+}
+
+.card.test table th:first-child,
+.card.test table td:first-child {
+  width: 50%;
+}
+
+.card.state table td:first-child,
+.card.target table td:first-child,
+.card.path table td:first-child {
+  width: 240px;
+}
+
+.card.fail {
+  border-color: var(--danger);
+  box-shadow: 0 20px 40px rgba(241, 123, 80, 0.15);
+}
+
+article#door-resources {
+  display: grid;
+  gap: var(--space-4);
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+}
+
+.badge {
+  display: inline-flex;
+  padding: 2px 8px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text);
+  font-size: 13px;
+  border: 1px solid var(--line);
+}

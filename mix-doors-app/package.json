@@ -1,0 +1,13 @@
+{
+  "name": "mix-doors-app",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build"
+  },
+  "devDependencies": {
+    "vite": "^5.3.0"
+  }
+}

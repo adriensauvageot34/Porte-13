@@ -10,11 +10,11 @@ function renderPathRow(path) {
   `;
 }
 
-export function mountPathPicker(container, paths = [], rules = {}) {
+export function mountPathTable(container, paths = [], rules = {}) {
   if (!container) return;
   const rows = paths.map((p) => renderPathRow(p)).join('');
   container.innerHTML = `
-    <table class="paths-table">
+    <table class="paths-table table-compact">
       <tr>
         <th>PATH</th>
         <th class="center">TRIAL</th>
@@ -49,11 +49,11 @@ function renderTargetRow(target) {
   `;
 }
 
-export function mountTargetPicker(container, targets = [], rules = {}) {
+export function mountTargetTable(container, targets = [], rules = {}) {
   if (!container) return;
   const rows = targets.map((t) => renderTargetRow(t)).join('');
   container.innerHTML = `
-    <table class="targets-table">
+    <table class="targets-table table-compact">
       <tr>
         <th>Target</th>
         <th class="center">PRIMARY</th>
@@ -69,7 +69,7 @@ export function mountTargetPicker(container, targets = [], rules = {}) {
     box.addEventListener('change', (e) => {
       if (!e.target.checked) return;
       const checked = Array.from(
-        container.querySelectorAll('input[type="checkbox"][data-bind="targets.secondary"]:checked')
+        container.querySelectorAll('input[type="checkbox"][data-bind="targets.secondary"]:checked'),
       );
       if (checked.length > maxSecondary) {
         e.target.checked = false;
@@ -109,7 +109,7 @@ export function mountTestsTable(container, testsData = {}) {
     .join('');
 
   container.innerHTML = `
-    <table class="tests-table">
+    <table class="tests-table table-compact">
       <tr>
         <th>Test</th>
         <th class="center">PASS</th>

@@ -1,1 +1,15 @@
-/* placeholder style */
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: var(--space-3);
+}
+
+.table-compact th,
+.table-compact td {
+  padding: 8px 10px;
+}
+
+.smallnote {
+  font-size: 12px;
+  color: var(--muted);
+}

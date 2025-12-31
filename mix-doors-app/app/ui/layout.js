@@ -1,12 +1,21 @@
 import { buildNav, mountScrollSpy } from '../core/navigation.js';
 
-export function renderLayout({ meta, manifest, contentHtml, resourcesHtml }) {
+export function renderLayout({ meta, manifest, contentHtml, resourcesHtml, doors = [], currentDoorId }) {
   document.title = `🧭 ${meta.title}`;
   const app = document.querySelector('#app');
+  const doorOptions = doors
+    .map((door) => `<option value="${door.id}">${door.id} — ${door.title}</option>`)
+    .join('');
+
   app.innerHTML = `
     <aside>
       <div class="nav-title">
         <span>Navigation</span>
+        <span class="pill">${meta.id}</span>
+      </div>
+      <div class="door-switch">
+        <label for="door-switch">Porte</label>
+        <select id="door-switch">${doorOptions}</select>
       </div>
       <div class="nav" id="nav"></div>
     </aside>
@@ -33,5 +42,10 @@ export function renderLayout({ meta, manifest, contentHtml, resourcesHtml }) {
   });
   mountScrollSpy(manifest, nav);
 
-  return { contentRoot: contentTarget, resourcesRoot: resTarget };
+  const doorSelect = app.querySelector('#door-switch');
+  if (doorSelect && currentDoorId) {
+    doorSelect.value = currentDoorId;
+  }
+
+  return { contentRoot: contentTarget, resourcesRoot: resTarget, doorSelect };
 }

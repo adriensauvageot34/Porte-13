@@ -1,1 +1,84 @@
-/* placeholder style */
+.runbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  box-shadow: var(--shadow-soft);
+  backdrop-filter: blur(6px);
+}
+
+.runbar .stack {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+.runbar .status {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.runbar select {
+  min-width: 120px;
+}
+
+.runbar .actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+
+.runbar button {
+  background: var(--line-strong);
+  color: var(--text);
+  border: 1px solid var(--line);
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+}
+
+.runbar button.primary {
+  background: var(--accent-strong);
+  color: #041322;
+  border-color: transparent;
+  font-weight: 700;
+}
+
+.runbar .done-state {
+  font-weight: 700;
+  color: var(--muted);
+}
+
+.runbar .blockers {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.runbar .blocker {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--danger);
+  color: var(--danger);
+  background: rgba(241, 123, 80, 0.08);
+  font-size: 13px;
+}
+
+.runbar .blocker.ok {
+  border-color: var(--success);
+  color: var(--success);
+  background: rgba(114, 224, 168, 0.12);
+}
