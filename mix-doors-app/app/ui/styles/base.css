@@ -347,6 +347,27 @@ label.opt input[type='radio'] {
   margin-top: 0;
 }
 
+.drawer-close {
+  position: absolute;
+  top: var(--space-2);
+  right: var(--space-2);
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: var(--text);
+  cursor: pointer;
+  padding: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.drawer-close:hover {
+  color: var(--accent);
+}
+
 .toast {
   position: fixed;
   bottom: 20px;

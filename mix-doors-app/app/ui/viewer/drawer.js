@@ -1,6 +1,11 @@
 export function openResource(resourceNode) {
   const drawer = ensureDrawer();
   drawer.innerHTML = '';
+  const closeButton = document.createElement('button');
+  closeButton.className = 'drawer-close';
+  closeButton.innerHTML = '×';
+  closeButton.addEventListener('click', closeDrawer);
+  drawer.appendChild(closeButton);
   const content = document.createElement('div');
   content.className = 'drawer-content';
   if (resourceNode) {
@@ -10,6 +15,13 @@ export function openResource(resourceNode) {
   }
   drawer.appendChild(content);
   drawer.classList.add('open');
+}
+
+export function closeDrawer() {
+  const drawer = document.querySelector('.drawer');
+  if (drawer) {
+    drawer.classList.remove('open');
+  }
 }
 
 function ensureDrawer() {
