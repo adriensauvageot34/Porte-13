@@ -1,308 +1,287 @@
-<div class="door">
-  <div class="door-title">
-    <h1>🧭 PORTE P13 — Espace (reverb / delay / profondeur)</h1>
-    <p class="muted">P13 = mise en scène : reverb/delay positionnent et hiérarchisent. Objectif : profondeur lisible sans voler le message.</p>
+<!-- doors/P13/door.content.html -->
+<!-- IMPORTANT: pas de <h1> ici (le layout affiche le titre depuis door.meta.json) -->
+
+<section class="card state" data-section data-section-id="state">
+  <header>
+    <div class="h">
+      <span class="tag">0) [STATE]</span>
+      <span>Bandeau d’état</span>
+    </div>
+    <div class="sub">Status + toggles + liens rapides</div>
+  </header>
+
+  <div class="body">
+    <table>
+      <tr>
+        <th style="width:220px;">Champ</th>
+        <th>Valeur</th>
+      </tr>
+
+      <tr>
+        <td><b>Status</b></td>
+        <td>
+          <label class="opt"><input type="radio" name="status" value="ACTIVE" data-bind="status"> ACTIVE</label>
+          <label class="opt"><input type="radio" name="status" value="DONE" data-bind="status"> DONE</label>
+          <label class="opt"><input type="radio" name="status" value="NEEDS_RETEST" data-bind="status"> NEEDS_RETEST</label>
+          <label class="opt"><input type="radio" name="status" value="RISK" data-bind="status"> RISK</label>
+        </td>
+      </tr>
+
+      <tr>
+        <td><b>Toggles</b></td>
+        <td>
+          <label class="opt">
+            <input type="checkbox" data-bind="toggles.sigOff">
+            <span class="tag">[TOGGLE:SIG_OFF]</span>
+          </label>
+          <label class="opt">
+            <input type="checkbox" data-bind="toggles.ctrlOff">
+            <span class="tag">[TOGGLE:CTRL_OFF]</span>
+          </label>
+        </td>
+      </tr>
+
+      <tr>
+        <td><b>Checkpoint</b></td>
+        <td>
+          <button class="btn sm" type="button" data-open-resource="checkpoints">Ouvrir CHECKPOINTS</button>
+          <span class="muted">— [CHECKPOINT:PH2_LOCKED] / [CHECKPOINT:PH3_LOCKED]</span>
+        </td>
+      </tr>
+
+      <tr>
+        <td><b>RISK_BADGE</b></td>
+        <td>
+          <input class="fill" placeholder="ex: FX sujet / nuage / mono fragile / groove cassé" data-bind="state.riskBadge">
+        </td>
+      </tr>
+
+      <tr>
+        <td><b>DEPENDS / REOPENS</b></td>
+        <td>
+          <button class="btn sm" type="button" data-open-resource="depends">Ouvrir DEPENDS / REOPENS</button>
+          <span class="muted">— ⚠ [DEPENDS_ON:P11] ⚠ [DEPENDS_ON:P8] ⚠ [DEPENDS_ON:P10] / ⚠ [REOPENS:P13]</span>
+        </td>
+      </tr>
+    </table>
   </div>
+</section>
 
-  <!-- 0) STATE -->
-  <section class="card" data-section-id="state">
-    <header>
-      <div class="h">
-        <span class="tag">0) [STATE]</span>
-        <span>Bandeau d’état</span>
-      </div>
-      <div class="sub">Status / Toggles / checkpoint / risques / liens rapides</div>
-    </header>
-
-    <div class="body">
-      <table>
-        <tr><th style="width:220px;">Champ</th><th>Valeur</th></tr>
-
-        <tr>
-          <td><b>Status</b></td>
-          <td>
-            <label class="opt"><input type="radio" name="p13_status" data-bind="status" value="ACTIVE"> ACTIVE</label>
-            <label class="opt"><input type="radio" name="p13_status" data-bind="status" value="DONE"> DONE</label>
-            <label class="opt"><input type="radio" name="p13_status" data-bind="status" value="NEEDS_RETEST"> NEEDS_RETEST</label>
-            <label class="opt"><input type="radio" name="p13_status" data-bind="status" value="RISK"> RISK</label>
-          </td>
-        </tr>
-
-        <tr>
-          <td><b>Toggles</b></td>
-          <td>
-            <label class="opt"><input type="checkbox" data-bind="toggles.sigOff"> <span class="tag">[TOGGLE:SIG_OFF]</span></label>
-            <label class="opt"><input type="checkbox" data-bind="toggles.ctrlOff"> <span class="tag">[TOGGLE:CTRL_OFF]</span></label>
-          </td>
-        </tr>
-
-        <tr>
-          <td><b>Checkpoint actuel</b></td>
-          <td class="muted">
-            <a href="#" data-open-resource="p13-checkpoints">[CHECKPOINT:PH2_LOCKED] / [CHECKPOINT:PH3_LOCKED]</a>
-          </td>
-        </tr>
-
-        <tr>
-          <td><b>RISK_BADGE</b></td>
-          <td><input class="fill" placeholder="ex: FX sujet / nuage / mono fragile / groove cassé" data-bind="state.riskBadge"></td>
-        </tr>
-
-        <tr>
-          <td><b>DEPENDS / REOPENS</b></td>
-          <td class="muted">
-            ⚠ <a href="#" data-open-resource="p13-depends">[DEPENDS_ON:P11]</a>
-            ⚠ <a href="#" data-open-resource="p13-depends">[DEPENDS_ON:P8]</a>
-            ⚠ <a href="#" data-open-resource="p13-depends">[DEPENDS_ON:P10]</a>
-            / ⚠ <a href="#" data-open-resource="p13-depends">[REOPENS:P13]</a>
-          </td>
-        </tr>
-      </table>
+<section class="card path" data-section data-section-id="path">
+  <header>
+    <div class="h">
+      <span class="tag">1) PATH</span>
+      <span>PATH PICKER — TRIAL → COMMIT</span>
     </div>
-  </section>
+    <div class="sub">TRIAL max 2 / COMMIT 1 obligatoire</div>
+  </header>
 
-  <!-- 1) PATH -->
-  <section class="card" data-section-id="path">
-    <header>
-      <div class="h">
-        <span class="tag">1) PATH</span>
-        <span>PATH PICKER — TRIAL → COMMIT</span>
-      </div>
-      <div class="sub">TRIAL max 2 / COMMIT 1 obligatoire</div>
-    </header>
+  <div class="body">
+    <div data-mount="path-picker"></div>
 
-    <div class="body">
-      <div data-mount="path-picker"></div>
-
-      <div class="hr"></div>
-      <div class="muted">
-        <b>Règles (factuelles)</b>
-        <ul>
-          <li>TRIAL : maximum 2 chemins cochés.</li>
-          <li>COMMIT : 1 seul chemin coché (obligatoire).</li>
-          <li>Si COMMIT non coché → porte ≠ DONE.</li>
-          <li>Après COMMIT : pas de changement de chemin sans FAIL prouvé + trigger noté. <span class="ref">[REF:R3-07]</span></li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <!-- 1bis) TARGET -->
-  <section class="card" data-section-id="target">
-    <header>
-      <div class="h">
-        <span class="tag">1bis) TARGET</span>
-        <span>TARGET PICKER — SCOPE</span>
-      </div>
-      <div class="sub">PRIMARY 1 obligatoire / SECONDARY 0–2</div>
-    </header>
-
-    <div class="body">
-      <div data-mount="target-picker"></div>
-
-      <div class="hr"></div>
-      <div class="muted">
-        <b>Règles</b>
-        <ul>
-          <li>PRIMARY : 1 seul rôle coché (obligatoire). Par défaut : PRIMARY = RETURNS.</li>
-          <li>SECONDARY : 0–2 max.</li>
-          <li>Si aucun PRIMARY → porte ≠ DONE.</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <!-- CORE -->
-  <section class="card" data-section-id="core">
-    <header>
-      <div class="h">
-        <span class="tag">[CORE]</span>
-        <span>Exécution</span>
-      </div>
-      <div class="sub">Décider un monde, prouver, puis geler.</div>
-    </header>
-
-    <div class="body">
+    <div class="hr"></div>
+    <div class="muted">
+      <b>Règles (factuelles)</b>
       <ul>
-        <li><b>Objectif</b> : mettre en scène la voix (plan + hiérarchie), pas décorer.</li>
-        <li><b>Grande question</b> : l’espace prend-il la place du message (lead recule, diction floue, plans illisibles) ?</li>
-        <li><b>Contrat garanti</b> : si PASS, la lead reste devant, les couches restent derrière, et l’espace se ressent sans attirer l’attention. <span class="ref">[REF:R3-04]</span></li>
-        <li><b>Décision principale</b> : choisir un seul monde par section, puis doser via SEND/RETURN (pas “au hasard” partout).</li>
-        <li><b>Sortie attendue</b> : profondeur lisible (centre sacré), cohérence par section, throws choisis, groove intact. <span class="ref">[REF:R3-16]</span></li>
-        <li><b>Interdits</b> : juger “mieux” parce que plus fort, empiler 5 espaces, utiliser la reverb pour “faire exister” la voix. <span class="ref">[REF:R3-03]</span></li>
-        <li><b>LISTEN</b> : <span class="tag">[LISTEN:Plan]</span> <span class="tag">[LISTEN:Diction]</span> <span class="tag">[LISTEN:Groove]</span></li>
-        <li><b>Preuve</b> : A/B level-match (bypass) + A/B <span class="tag">[TOGGLE:SIG_OFF]</span> vs ON (level-match). <span class="ref">[REF:R3-05]</span> <span class="ref">[REF:R3-02]</span></li>
-        <li><b>Dry doit tenir</b> : si la lead “tombe” quand SIG OFF, le problème est ailleurs → rollback Phase 2. <span class="ref">[REF:R3-11]</span> <span class="ref">[REF:R3-03]</span></li>
-        <li><b>Routing-first</b> : déclare où vit l’espace (1–2 returns fixes + throws) avant de toucher les réglages. <span class="ref">[REF:R3-13]</span></li>
+        <li>TRIAL : maximum 2 chemins cochés.</li>
+        <li>COMMIT : 1 seul chemin coché (obligatoire).</li>
+        <li>Si COMMIT non coché → porte ≠ DONE.</li>
+        <li>Après COMMIT : pas de changement de monde sans FAIL prouvé + trigger noté. <span class="ref">[REF:R3-07]</span></li>
       </ul>
-
-      <div class="hr"></div>
-
-      <table>
-        <tr><th style="width:220px;">Champ</th><th>Valeur</th></tr>
-
-        <tr>
-          <td><b>PATH_COMMIT</b></td>
-          <td>
-            <input class="fill" placeholder="auto-rempli au COMMIT (ex: Plate luxe)" data-bind="core.pathCommit" readonly>
-            <div class="hr"></div>
-            <div style="display:grid;grid-template-columns: 1fr 1fr; gap:10px;">
-              <div><b>CROIX</b><input class="fill" placeholder="auto-rempli" data-bind="core.croix" readonly></div>
-              <div><b>RISK_FOCUS</b><input class="fill" placeholder="auto-rempli" data-bind="core.riskFocus" readonly></div>
-            </div>
-          </td>
-        </tr>
-
-        <tr>
-          <td><b>TARGET_PRIMARY</b></td>
-          <td><input class="fill" placeholder="auto-rempli (ex: RETURNS)" data-bind="core.targetPrimary" readonly></td>
-        </tr>
-
-        <tr>
-          <td><b>TARGET_SECONDARY</b></td>
-          <td><input class="fill" placeholder='auto-rempli ("Aucun" si vide)' data-bind="core.targetSecondary" readonly></td>
-        </tr>
-
-        <tr>
-          <td><b>SCAN</b></td>
-          <td class="muted">plan avant/arrière → consonnes → fins de phrases → mono → groove (1 intention à la fois).</td>
-        </tr>
-
-        <tr>
-          <td><b>CONSTATS</b></td>
-          <td><input class="fill" placeholder="1 phrase avant correction → NOTES—Porte (ou NOTES—OREILLE_NEUVE)" data-bind="core.constats"></td>
-        </tr>
-      </table>
-
-      <div class="hr"></div>
-
-      <div class="muted">
-        <b>Ressources rapides</b> (ouvre dans un drawer) :
-        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;">
-          <button class="btn" data-open-resource="p13-redflags">3) RED FLAGS</button>
-          <button class="btn" data-open-resource="p13-sigfail">4) SYMPTÔMES SIGNATURE</button>
-          <button class="btn" data-open-resource="p13-soclefail">5) SYMPTÔMES SOCLE</button>
-          <button class="btn" data-open-resource="p13-listen">6) LISTEN</button>
-          <button class="btn" data-open-resource="p13-techpack">7) TECH PACK</button>
-          <button class="btn" data-open-resource="p13-busmap">8) BUSMAP</button>
-          <button class="btn" data-open-resource="p13-modules">9) MINI-MODULES</button>
-          <button class="btn" data-open-resource="p13-checkpoints">11) CHECKPOINTS</button>
-        </div>
-      </div>
-
-      <div class="hr"></div>
-
-      <div class="stop"><b>STOP</b> : si “mieux” seulement parce que plus fort → level-match → re-décide, sinon refuse. <span class="ref">[REF:R3-05]</span></div>
-      <div class="stop"><b>STOP</b> : si la lead recule → baisse l’espace (un levier) → re-test. <span class="ref">[REF:R3-04]</span></div>
-      <div class="stop"><b>STOP</b> : si la diction se noie → espace doit se retirer pendant la phrase (un levier) → re-test. <span class="ref">[REF:R3-10]</span></div>
-      <div class="stop"><b>STOP</b> : si mono rend le centre instable/creux → resserre ou remplace l’espace → re-test. <span class="ref">[REF:R3-04]</span></div>
-      <div class="stop"><b>STOP</b> : si l’écho casse le flow → simplifie ou retire → re-test. <span class="ref">[REF:R3-10]</span></div>
+      <button class="btn sm" type="button" data-open-resource="techpack">Ouvrir TECH PACK</button>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- TESTS -->
-  <section class="card" data-section-id="tests">
-    <header>
-      <div class="h">
-        <span class="tag">2) [TEST:ALWAYS]</span>
-        <span>Table PASS / FAIL / SKIP</span>
-      </div>
-      <div class="sub">SIG_OFF vs ON = non-skippable pour DONE</div>
-    </header>
-
-    <div class="body">
-      <div data-mount="tests-table"></div>
-
-      <div class="hr"></div>
-      <div class="muted">
-        <b>Règles</b>
-        <ul>
-          <li>PASS partout → ne rien ouvrir → HANDOFF + JOURNAL → porte suivante.</li>
-          <li>Si SIG OFF vs ON est SKIP → porte ≠ DONE.</li>
-          <li>Si PATH_COMMIT validé = SKIP → porte ≠ DONE.</li>
-          <li>Si supports requis et tous SKIP/vides → porte ≠ DONE.</li>
-        </ul>
-      </div>
+<section class="card target" data-section data-section-id="target">
+  <header>
+    <div class="h">
+      <span class="tag">1bis) TARGET</span>
+      <span>TARGET PICKER — SCOPE</span>
     </div>
-  </section>
+    <div class="sub">PRIMARY 1 obligatoire / SECONDARY 0–2</div>
+  </header>
 
-  <!-- HANDOFF -->
-  <section class="card" data-section-id="handoff">
-    <header>
-      <div class="h">
-        <span class="tag">12) HANDOFF</span>
-        <span>Sortie (3 lignes max)</span>
-      </div>
-      <div class="sub">Ce que tu gèles si PASS</div>
-    </header>
+  <div class="body">
+    <div data-mount="target-picker"></div>
 
-    <div class="body">
+    <div class="hr"></div>
+    <div class="muted">
+      <b>Règles</b>
       <ul>
-        <li><b>ON/OFF</b> : monde d’espace déclaré ; returns contrôlables ; SIG OFF = preuve. <span class="ref">[REF:R3-02]</span></li>
-        <li><b>RISK_BADGE + trigger</b> (si fragile) :
-          <input class="fill" placeholder="______" data-bind="handoff.riskBadge"> ;
-          réouvrir seulement sur FAIL prouvé. <span class="ref">[REF:R3-18]</span>
-        </li>
-        <li><b>Next door</b> : <span class="tag" data-bind="handoff.nextDoor"></span> — Largeur / couches / architecture.</li>
+        <li>PRIMARY : 1 seul rôle coché (obligatoire).</li>
+        <li>SECONDARY : 0–2 max.</li>
+        <li>Par défaut : PRIMARY = RETURNS.</li>
+        <li>Si aucun PRIMARY → porte ≠ DONE.</li>
       </ul>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- NOTES -->
-  <section class="card" data-section-id="notes">
-    <header>
-      <div class="h">
-        <span class="tag">13) NOTES</span>
-        <span>Porte (SCOPE=door)</span>
-      </div>
-      <div class="sub">2 TRIAL + 1 CONSTATS (1 phrase)</div>
-    </header>
-
-    <div class="body">
-      <table>
-        <tr><th style="width:200px;">Champ</th><th>Texte</th></tr>
-        <tr><td>TRIAL</td><td><input class="fill" placeholder="+apport / -casse (1 phrase)" data-bind="notes.trials.0"></td></tr>
-        <tr><td>TRIAL</td><td><input class="fill" placeholder="+apport / -casse (1 phrase)" data-bind="notes.trials.1"></td></tr>
-        <tr><td>CONSTATS</td><td><input class="fill" placeholder="1 phrase" data-bind="notes.constats"></td></tr>
-        <tr><td>OREILLE_NEUVE</td><td><input class="fill" placeholder="si déclenchée: note courte" data-bind="notes.oreilleNeuve"></td></tr>
-        <tr><td>Après COMMIT</td><td class="muted">Chaque correction référence RISK_FOCUS ou CROIX (sinon FAIL).</td></tr>
-      </table>
+<section class="card core" data-section data-section-id="core">
+  <header>
+    <div class="h">
+      <span class="tag">[CORE]</span>
+      <span>Exécution</span>
     </div>
-  </section>
+    <div class="sub">10–20 lignes max (impératif, preuves, STOP)</div>
+  </header>
 
-  <!-- JOURNAL -->
-  <section class="card" data-section-id="journal">
-    <header>
-      <div class="h">
-        <span class="tag">14) JOURNAL</span>
-        <span>1 ligne minimum</span>
-      </div>
-      <div class="sub">Trace l’action (1 levier) + résultat</div>
-    </header>
+  <div class="body">
+    <ul>
+      <li><b>Objectif</b> : mettre en scène la voix (plan + hiérarchie), pas décorer.</li>
+      <li><b>Grande question</b> : l’espace prend-il la place du message (lead recule, diction floue, plans illisibles) ?</li>
+      <li><b>Contrat garanti</b> : si PASS, la lead reste devant, les couches restent derrière, et l’espace se ressent sans attirer l’attention. <span class="ref">[REF:R3-04]</span></li>
+      <li><b>Décision principale</b> : choisir un seul monde par section, puis doser via SEND/RETURN (pas “au hasard” partout).</li>
+      <li><b>Sortie attendue</b> : profondeur lisible (centre sacré), cohérence par section, throws choisis, groove intact. <span class="ref">[REF:R3-16]</span></li>
+      <li><b>Interdits</b> : “mieux” parce que plus fort, empiler 5 espaces, utiliser la reverb pour “faire exister” la voix. <span class="ref">[REF:R3-03]</span></li>
+      <li><b>LISTEN</b> : <button class="btn sm" type="button" data-open-resource="listen">Ouvrir LISTEN PANELS</button></li>
+      <li><b>Preuve</b> : A/B level-match (bypass) + A/B <span class="tag">[TOGGLE:SIG_OFF]</span> vs ON (level-match). <span class="ref">[REF:R3-05]</span> <span class="ref">[REF:R3-02]</span></li>
+      <li><b>Dry doit tenir</b> : si la lead tombe quand SIG OFF, le problème est ailleurs → rollback Phase 2. <span class="ref">[REF:R3-11]</span> <span class="ref">[REF:R3-03]</span></li>
+      <li><b>Routing-first</b> : déclare où vit l’espace (1–2 returns fixes + throws) avant de toucher les réglages. <span class="ref">[REF:R3-13]</span></li>
+    </ul>
 
-    <div class="body">
-      <table>
-        <tr>
-          <th>Date</th>
-          <th>Porte</th>
-          <th>PATH_COMMIT</th>
-          <th>TARGET_PRIMARY</th>
-          <th>Action</th>
-          <th>Résultat</th>
-          <th>NEEDS_RETEST</th>
-          <th>RISK_BADGE</th>
-        </tr>
-        <tr>
-          <td><input class="fill" placeholder="YYYY-MM-DD" data-bind="journalDraft.date"></td>
-          <td>P13</td>
-          <td><input class="fill" placeholder="auto" data-bind="core.pathCommit" readonly></td>
-          <td><input class="fill" placeholder="auto" data-bind="core.targetPrimary" readonly></td>
-          <td><input class="fill" placeholder="1 levier" data-bind="journalDraft.action"></td>
-          <td><input class="fill" placeholder="PASS/FAIL" data-bind="journalDraft.result"></td>
-          <td><input class="fill" placeholder="oui/non" data-bind="journalDraft.needsRetest"></td>
-          <td><input class="fill" placeholder="..." data-bind="journalDraft.riskBadge"></td>
-        </tr>
-      </table>
+    <div class="hr"></div>
+
+    <table>
+      <tr>
+        <th style="width:220px;">Champ</th>
+        <th>Valeur</th>
+      </tr>
+      <tr>
+        <td><b>PATH_COMMIT</b></td>
+        <td>
+          <span class="tag" data-bind="core.pathCommit"></span>
+          <div class="hr"></div>
+          <div style="display:grid;grid-template-columns: 1fr 1fr; gap:10px;">
+            <div><b>CROIX</b><div class="muted" data-bind="core.croix"></div></div>
+            <div><b>RISK_FOCUS</b><div class="muted" data-bind="core.riskFocus"></div></div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td><b>TARGET_PRIMARY</b></td>
+        <td><span class="tag" data-bind="core.targetPrimary"></span></td>
+      </tr>
+      <tr>
+        <td><b>TARGET_SECONDARY</b></td>
+        <td><span class="muted" data-bind="core.targetSecondary"></span></td>
+      </tr>
+      <tr>
+        <td><b>SCAN</b></td>
+        <td class="muted">plan avant/arrière → consonnes → fins de phrases → mono → groove (1 intention à la fois).</td>
+      </tr>
+      <tr>
+        <td><b>CONSTATS</b></td>
+        <td><input class="fill" placeholder="1 phrase avant correction → NOTES—Porte (ou NOTES—OREILLE_NEUVE)" data-bind="core.constats"></td>
+      </tr>
+    </table>
+
+    <div class="hr"></div>
+
+    <div class="stop"><b>STOP</b> : si “mieux” seulement parce que plus fort → level-match → re-décide, sinon refuse. <span class="ref">[REF:R3-05]</span></div>
+    <div class="stop"><b>STOP</b> : si la lead recule → baisse l’espace (un levier) → re-test. <span class="ref">[REF:R3-04]</span></div>
+    <div class="stop"><b>STOP</b> : si la diction se noie → l’effet doit se retirer pendant la phrase (un levier) → re-test. <span class="ref">[REF:R3-10]</span></div>
+    <div class="stop"><b>STOP</b> : si mono rend le centre instable/creux → resserre ou remplace l’espace → re-test. <span class="ref">[REF:R3-04]</span></div>
+    <div class="stop"><b>STOP</b> : si l’écho casse le flow → simplifie ou retire → re-test. <span class="ref">[REF:R3-10]</span></div>
+
+    <div class="hr"></div>
+    <button class="btn sm" type="button" data-open-resource="fail">Ouvrir (IF:FAIL) Actions</button>
+    <button class="btn sm" type="button" data-open-resource="refs">Ouvrir R3 refs</button>
+  </div>
+</section>
+
+<section class="card test" data-section data-section-id="tests">
+  <header>
+    <div class="h">
+      <span class="tag">2) [TEST:ALWAYS]</span>
+      <span>Table PASS / FAIL / SKIP</span>
     </div>
-  </section>
-</div>
+    <div class="sub">Non-skippable pour “DONE” : SIG OFF vs ON + PATH_COMMIT</div>
+  </header>
+
+  <div class="body">
+    <div data-mount="tests-table"></div>
+
+    <div class="hr"></div>
+    <div class="muted">
+      <b>Règles</b>
+      <ul>
+        <li>PASS partout → HANDOFF + JOURNAL → porte suivante.</li>
+        <li>Si SIG OFF vs ON est SKIP → porte ≠ DONE.</li>
+        <li>Si PATH_COMMIT = SKIP → porte ≠ DONE.</li>
+        <li>Si tests supports requis et tous SKIP → porte ≠ DONE.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="card core" data-section data-section-id="handoff">
+  <header>
+    <div class="h">
+      <span class="tag">12) HANDOFF</span>
+      <span>Sortie (3 lignes max)</span>
+    </div>
+    <div class="sub">Ce que tu gèles si PASS</div>
+  </header>
+
+  <div class="body">
+    <ul>
+      <li><b>ON/OFF</b> : monde d’espace déclaré ; returns contrôlables ; SIG OFF = preuve. <span class="ref">[REF:R3-02]</span></li>
+      <li><b>RISK_BADGE + trigger</b> (si fragile) :
+        <input class="fill" placeholder="______" data-bind="handoff.riskBadge">
+        — réouvrir seulement sur FAIL prouvé. <span class="ref">[REF:R3-18]</span>
+      </li>
+      <li><b>Next door</b> : P14 — Largeur / couches / architecture.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="card tech" data-section data-section-id="notes">
+  <header>
+    <div class="h">
+      <span class="tag">13) NOTES</span>
+      <span>Porte (SCOPE=door)</span>
+    </div>
+    <div class="sub">Après COMMIT : chaque correction référence RISK_FOCUS ou CROIX</div>
+  </header>
+
+  <div class="body">
+    <table>
+      <tr><th style="width:200px;">Champ</th><th>Texte</th></tr>
+      <tr><td>TRIAL</td><td><input class="fill" placeholder="+apport / -casse (1 phrase)" data-bind="notes.trials.0"></td></tr>
+      <tr><td>TRIAL</td><td><input class="fill" placeholder="+apport / -casse (1 phrase)" data-bind="notes.trials.1"></td></tr>
+      <tr><td>CONSTATS</td><td><input class="fill" placeholder="1 phrase" data-bind="notes.constats"></td></tr>
+      <tr><td>OREILLE_NEUVE</td><td><input class="fill" placeholder="si déclenchée" data-bind="notes.oreilleNeuve"></td></tr>
+    </table>
+  </div>
+</section>
+
+<section class="card tech" data-section data-section-id="journal">
+  <header>
+    <div class="h">
+      <span class="tag">14) JOURNAL</span>
+      <span>1 ligne minimum</span>
+    </div>
+    <div class="sub">Sauvegarde rapide (draft)</div>
+  </header>
+
+  <div class="body">
+    <table>
+      <tr>
+        <th>Date</th><th>Porte</th><th>PATH_COMMIT</th><th>TARGET_PRIMARY</th>
+        <th>Action</th><th>Résultat</th><th>NEEDS_RETEST</th><th>RISK_BADGE</th>
+      </tr>
+      <tr>
+        <td><input class="fill" placeholder="YYYY-MM-DD" data-bind="journalDraft.date"></td>
+        <td>P13</td>
+        <td><input class="fill" placeholder="auto" data-bind="journalDraft.pathCommit"></td>
+        <td><input class="fill" placeholder="auto" data-bind="journalDraft.targetPrimary"></td>
+        <td><input class="fill" placeholder="1 levier" data-bind="journalDraft.action"></td>
+        <td><input class="fill" placeholder="PASS/FAIL" data-bind="journalDraft.result"></td>
+        <td><input class="fill" placeholder="oui/non" data-bind="journalDraft.needsRetest"></td>
+        <td><input class="fill" placeholder="..." data-bind="journalDraft.riskBadge"></td>
+      </tr>
+    </table>
+  </div>
+</section>
