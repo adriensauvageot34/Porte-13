@@ -1,20 +1,29 @@
 {
-  "schemaVersion": 1,
-  "policies": {
-    "trial": true,
-    "commit": true,
-    "primaryRequired": true,
-    "secondaryAllowed": true,
-    "supportsRequired": true
+  "path": {
+    "trialMax": 2,
+    "commitRequired": true,
+    "commitUnique": true,
+    "afterCommitChangeRequiresFail": true,
+    "afterCommitRef": "R3-07"
   },
-  "gates": [
-    {"type": "field", "path": "path.commit", "label": "Commit path"},
-    {"type": "testRequired", "testId": "sig_ab"},
-    {"type": "testRequired", "testId": "returns"}
-  ],
-  "toggles": ["SIG_OFF", "CTRL_OFF"],
   "targets": {
-    "primary": ["RETURNS", "DEPTH", "SENDS"],
-    "secondary": ["CTRL", "DRYNESS", "PERC", "VOICE"]
-  }
+    "primaryRequired": true,
+    "primaryUnique": true,
+    "primaryDefault": "RETURNS",
+    "secondaryMax": 2
+  },
+  "supportsPolicy": {
+    "supportsRequiredWhen": {
+      "primaryNotIn": ["LEAD"],
+      "orSecondaryNotEmpty": true
+    },
+    "supportTestsIds": ["mute_supports","mute_lead","side_only"],
+    "rule": "IF supportsRequired THEN at least one support test must be PASS or FAIL (not all SKIP/empty)."
+  },
+  "doneGates": [
+    { "type":"requiredField", "path":"path.commit", "message":"PATH_COMMIT manquant" },
+    { "type":"requiredTestNotSkipped", "testId":"sig_ab", "message":"SIG_OFF vs ON non-skippable" },
+    { "type":"requiredTestNotSkipped", "testId":"path_commit", "message":"PATH_COMMIT validé requis" },
+    { "type":"supportsPolicy", "message":"Supports requis: tests supports non tous SKIP" }
+  ]
 }

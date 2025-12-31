@@ -1,23 +1,27 @@
-[
-  {
-    "id": "sig_ab",
-    "label": "Signature A/B est cohérente",
-    "groupKey": "sig",
-    "required": true,
-    "category": "ALWAYS"
-  },
-  {
-    "id": "returns",
-    "label": "Les returns sont câblés et contrôlables",
-    "groupKey": "returns",
-    "required": true,
-    "category": "ALWAYS"
-  },
-  {
-    "id": "delay_time",
-    "label": "Temps de delay ajusté",
-    "groupKey": "delay",
-    "required": false,
-    "category": "SUPPORT"
-  }
-]
+{
+  "groups": [
+    { "id":"always", "label":"[TEST:ALWAYS]", "scope":"door" },
+    { "id":"unique", "label":"Tests uniques P13", "scope":"door" },
+    { "id":"supports", "label":"Tests supports (conditionnels)", "scope":"door" }
+  ],
+  "tests": [
+    { "id":"bas_volume", "label":"Bas volume", "group":"always", "required": false, "support": false, "reasonField": true },
+    { "id":"mono", "label":"Mono", "group":"always", "required": false, "support": false, "reasonField": true },
+    { "id":"passage_dense", "label":"Passage dense", "group":"always", "required": false, "support": false, "reasonField": true },
+    { "id":"ab_bypass", "label":"A/B level-match (bypass) [REF:R3-05]", "group":"always", "required": false, "support": false, "reasonField": true },
+
+    { "id":"sig_ab", "label":"A/B [TOGGLE:SIG_OFF] vs ON (level-match) — FIXE / NON SKIPPABLE POUR DONE [REF:R3-02]", "group":"always", "required": true, "support": false, "reasonField": true, "nonSkippable": true },
+    { "id":"path_commit", "label":"PATH_COMMIT validé (A/B level-match) — si SKIP → porte ≠ DONE", "group":"always", "required": true, "support": false, "reasonField": true, "nonSkippable": true },
+
+    { "id":"check0", "label":"Check 0 “mieux = plus fort ?” (return level-match)", "group":"unique", "required": false, "support": false, "reasonField": true },
+    { "id":"lead_front", "label":"Lead reste au premier plan quand l’effet apparaît", "group":"unique", "required": false, "support": false, "reasonField": true },
+    { "id":"diction", "label":"Diction (consonnes) lisible quand l’effet apparaît", "group":"unique", "required": false, "support": false, "reasonField": true },
+    { "id":"fins", "label":"Fins de phrases propres (pas de nuage)", "group":"unique", "required": false, "support": false, "reasonField": true },
+    { "id":"groove", "label":"Groove respecté (delay ne parasite pas)", "group":"unique", "required": false, "support": false, "reasonField": true },
+    { "id":"coherence", "label":"Cohérence par section (pas de “changement de pièce” accidentel)", "group":"unique", "required": false, "support": false, "reasonField": true },
+
+    { "id":"mute_supports", "label":"Mute SUPPORTS", "group":"supports", "required": false, "support": true, "reasonField": true },
+    { "id":"mute_lead", "label":"Mute LEAD", "group":"supports", "required": false, "support": true, "reasonField": true },
+    { "id":"side_only", "label":"Side-only", "group":"supports", "required": false, "support": true, "reasonField": true }
+  ]
+}

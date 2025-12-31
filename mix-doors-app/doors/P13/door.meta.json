@@ -1,8 +1,8 @@
 {
   "id": "P13",
-  "title": "Porte P13 — Espace (reverb / delay / profondeur)",
-  "intent": "Diagnostiquer et sécuriser les choix d'espace et profondeur pour la session.",
+  "title": "PORTE P13 — Espace (reverb / delay / profondeur)",
+  "intent": "Mettre en scène la voix (plan + hiérarchie) sans que l’espace vole le message.",
   "prev": "P12",
   "next": "P14",
-  "version": "1.0.0"
+  "version": 1
 }

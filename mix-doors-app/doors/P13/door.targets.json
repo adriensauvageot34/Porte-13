@@ -1,0 +1,12 @@
+{
+  "targets": [
+    { "id": "RETURNS", "label": "RETURNS", "kind": "DEFAULT" },
+    { "id": "LEAD", "label": "LEAD", "kind": "COND" },
+    { "id": "DOUBLES_BACKS", "label": "DOUBLES/BACKS", "kind": "COND" },
+    { "id": "HARMONIES", "label": "HARMONIES", "kind": "COND" },
+    { "id": "ADLIBS", "label": "ADLIBS", "kind": "COND" },
+    { "id": "CHOPS", "label": "CHOPS", "kind": "COND" },
+    { "id": "BUS_VOCAL", "label": "BUS VOCAL", "kind": "RARE" },
+    { "id": "MIXBUS", "label": "MIXBUS", "kind": "RARE" }
+  ]
+}
