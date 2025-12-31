@@ -1,23 +1,24 @@
 {
-  "t3Order": ["state", "workflow", "path", "target", "core", "tests", "handoff"],
+  "t3Order": ["state","path","target","core","tests","handoff","notes","journal"],
   "sections": [
-    {"id": "workflow", "label": "0bis) GUIDE RAPIDE", "level": "T2", "collapsible": false, "kind": "tech"},
-    {"id": "state", "label": "0) [STATE]", "level": "T3", "collapsible": false, "kind": "state"},
-    {"id": "path", "label": "1) PATH PICKER", "level": "T3", "collapsible": false, "kind": "path"},
-    {"id": "target", "label": "1bis) TARGET PICKER", "level": "T3", "collapsible": false, "kind": "target"},
-    {"id": "core", "label": "[CORE] — Exécution", "level": "T3", "collapsible": false, "kind": "core"},
-    {"id": "tests", "label": "2) [TEST:ALWAYS]", "level": "T3", "collapsible": false, "kind": "test"},
-    {"id": "handoff", "label": "12) HANDOFF", "level": "T3", "collapsible": false, "kind": "core"},
-    {"id": "redflags", "label": "3) [IF:FAIL] RED FLAGS", "level": "T4", "collapsible": true, "kind": "fail"},
-    {"id": "sigfail", "label": "4) SYMPTÔMES SIGNATURE", "level": "T4", "collapsible": true, "kind": "fail"},
-    {"id": "soclefail", "label": "5) SYMPTÔMES SOCLE", "level": "T4", "collapsible": true, "kind": "fail"},
-    {"id": "listen", "label": "6) LISTEN PANELS", "level": "T4", "collapsible": true, "kind": "tech"},
-    {"id": "techpack", "label": "7) TECH PACK", "level": "T4", "collapsible": true, "kind": "tech"},
-    {"id": "busmap", "label": "8) BUSMAP", "level": "T4", "collapsible": true, "kind": "bus"},
-    {"id": "depends", "label": "10) DEPENDS / REOPENS", "level": "T4", "collapsible": true, "kind": "tech"},
-    {"id": "checkpoints", "label": "11) CHECKPOINTS", "level": "T4", "collapsible": true, "kind": "tech"},
-    {"id": "notes", "label": "13) NOTES — Porte", "level": "T4", "collapsible": true, "kind": "tech"},
-    {"id": "journal", "label": "14) JOURNAL", "level": "T4", "collapsible": true, "kind": "tech"},
-    {"id": "r3", "label": "[REF] R3", "level": "DOC", "collapsible": true, "kind": "doc"}
+    { "id":"state",  "level":"T3", "label":"0) [STATE]", "collapsible": false, "mount": null },
+    { "id":"path",   "level":"T3", "label":"1) PATH", "collapsible": false, "mount": "path-picker" },
+    { "id":"target", "level":"T3", "label":"1bis) TARGET", "collapsible": false, "mount": "target-picker" },
+    { "id":"core",   "level":"T3", "label":"[CORE]", "collapsible": false, "mount": null },
+    { "id":"tests",  "level":"T3", "label":"2) [TEST:ALWAYS]", "collapsible": false, "mount": "tests-table" },
+    { "id":"handoff","level":"T3", "label":"12) HANDOFF", "collapsible": false, "mount": null },
+    { "id":"notes",  "level":"T3", "label":"13) NOTES", "collapsible": false, "mount": null },
+    { "id":"journal","level":"T3", "label":"14) JOURNAL", "collapsible": false, "mount": null }
+  ],
+  "resources": [
+    { "id":"p13-redflags", "label":"3) [IF:FAIL] RED FLAGS", "kind":"FAIL" },
+    { "id":"p13-sigfail",  "label":"4) SYMPTÔMES SIGNATURE → ACTION", "kind":"FAIL" },
+    { "id":"p13-soclefail","label":"5) SYMPTÔMES SOCLE → ACTION", "kind":"FAIL" },
+    { "id":"p13-listen",   "label":"6) LISTEN PANELS", "kind":"TECH" },
+    { "id":"p13-techpack", "label":"7) TECH PACK", "kind":"TECH" },
+    { "id":"p13-busmap",   "label":"8) [BUSMAP:P13]", "kind":"TECH" },
+    { "id":"p13-modules",  "label":"9) MINI-MODULES STANDARD", "kind":"TECH" },
+    { "id":"p13-depends",  "label":"10) ⚠ DEPENDS / REOPENS", "kind":"TECH" },
+    { "id":"p13-checkpoints","label":"11) CHECKPOINTS", "kind":"TECH" }
   ]
 }

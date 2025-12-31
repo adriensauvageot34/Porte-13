@@ -1,8 +1,159 @@
-<section>
-  <h2 data-tags="REF:R3">Ressources locales</h2>
-  <p>Raccourcis vers les fiches et presets utilisés par la porte P13.</p>
-  <ul>
-    <li data-tags="ISSUE:P13-RETURNS">Retours: réglages rapides</li>
-    <li data-tags="FIX:DEPTH">Guide profondeur</li>
-  </ul>
-</section>
+<div class="door-resources">
+
+  <article class="resource" data-resource-id="p13-redflags" data-tags="DOOR:P13 TYPE:FAIL">
+    <h2>3) [IF:FAIL] RED FLAGS (FAIL direct)</h2>
+    <ul>
+      <li>“Ça marche” seulement quand tu montes l’effet (return) → FAIL (biais de volume).</li>
+      <li>L’espace vole le premier plan (lead recule) → FAIL.</li>
+      <li>L’effet concurrence le texte (consonnes noyées) → FAIL.</li>
+      <li>Tails empilent les phrases (nuage permanent) → FAIL.</li>
+      <li>Le delay casse le groove → FAIL.</li>
+      <li>En mono, centre instable ou voix creuse → FAIL. <span class="ref">[REF:R3-04]</span></li>
+      <li>Tu ne peux pas décrire simplement “où est” la voix → FAIL.</li>
+      <li>Tu utilises l’espace comme béquille pour “faire exister” la lead → FAIL → rollback Phase 2. <span class="ref">[REF:R3-03]</span></li>
+    </ul>
+  </article>
+
+  <article class="resource" data-resource-id="p13-sigfail" data-tags="DOOR:P13 TYPE:FAIL">
+    <h2>4) [IF:FAIL] SYMPTÔMES SIGNATURE → ACTION (format RUN)</h2>
+
+    <h3>A) Universels</h3>
+    <div class="stop"><b>SYMPTÔME</b> : “mieux” seulement parce que plus fort (CHECK 0)<br><b>CAUSE</b> : biais volume<br><b>ACTION</b> : level-match le return (1 levier)<br><b>RE-TEST</b> : A/B bypass + Bas volume<br><b>STOP</b> : si mieux à niveau égal, sinon refuse <span class="ref">[REF:R3-05]</span></div>
+    <div class="stop"><b>SYMPTÔME</b> : la lead recule dès que l’espace apparaît<br><b>CAUSE</b> : trop d’espace sur le centre<br><b>ACTION</b> : réduire l’espace sur la lead (1 levier)<br><b>RE-TEST</b> : Lead au premier plan + Passage dense<br><b>STOP</b> : si le centre redevient sacré <span class="ref">[REF:R3-04]</span></div>
+    <div class="stop"><b>SYMPTÔME</b> : consonnes/syllabes se noient<br><b>CAUSE</b> : timing d’effet qui parle pendant la phrase<br><b>ACTION</b> : faire se retirer l’effet pendant la diction (1 levier)<br><b>RE-TEST</b> : Diction lisible + Passage dense<br><b>STOP</b> : si phrase nette <span class="ref">[REF:R3-10]</span></div>
+    <div class="stop"><b>SYMPTÔME</b> : fins de phrases = nuage<br><b>CAUSE</b> : durée trop longue<br><b>ACTION</b> : raccourcir l’espace (1 levier)<br><b>RE-TEST</b> : Fins propres + Passage dense<br><b>STOP</b> : si silences respirent</div>
+    <div class="stop"><b>SYMPTÔME</b> : fatigue / “air” qui pique<br><b>CAUSE</b> : trop de haut dans l’espace<br><b>ACTION</b> : assombrir l’espace (1 levier)<br><b>RE-TEST</b> : Bas volume + LISTEN:Plan<br><b>STOP</b> : si l’espace se ressent sans briller</div>
+    <div class="stop"><b>SYMPTÔME</b> : boue/voile ajouté<br><b>CAUSE</b> : bas/bas-médium dans return<br><b>ACTION</b> : enlever le bas (1 levier)<br><b>RE-TEST</b> : Passage dense + Bas volume<br><b>STOP</b> : si clarté revient</div>
+    <div class="stop"><b>SYMPTÔME</b> : taille d’espace change sans intention<br><b>CAUSE</b> : incohérence locale<br><b>ACTION</b> : unifier par section (1 levier)<br><b>RE-TEST</b> : Cohérence + SIG OFF vs ON<br><b>STOP</b> : si “un monde” tient <span class="ref">[REF:R3-16]</span> <span class="ref">[REF:R3-02]</span></div>
+    <div class="stop"><b>SYMPTÔME</b> : écho parasite le flow<br><b>CAUSE</b> : répétitions trop audibles<br><b>ACTION</b> : simplifier (1 levier)<br><b>RE-TEST</b> : Groove + Passage dense<br><b>STOP</b> : si débit redevient net <span class="ref">[REF:R3-10]</span></div>
+
+    <h3>B) Spécifiques au PATH_COMMIT</h3>
+    <div class="stop"><b>[PATH:Ultra dry]</b><br>SYMPTÔME : trop sec / pas de scène<br>CAUSE : pas d’espace commun minimal<br>ACTION : ajouter espace commun discret<br>RE-TEST : Bas volume + Lead plan<br>STOP : si scène existe sans recul</div>
+    <div class="stop"><b>[PATH:Tight room]</b><br>SYMPTÔME : boxy/voile<br>CAUSE : early trop présents<br>ACTION : réduire la partie collante<br>RE-TEST : Diction + Passage dense<br>STOP : si ça colle sans colorer</div>
+    <div class="stop"><b>[PATH:Plate luxe]</b><br>SYMPTÔME : halo mais diction moins nette<br>CAUSE : queue parle pendant phrase<br>ACTION : duck/timing<br>RE-TEST : Diction + Fins<br>STOP : halo ressenti, pas entendu</div>
+    <div class="stop"><b>[PATH:Hall cinematic / Signature]</b><br>SYMPTÔME : FX sujet / tails envahissantes<br>CAUSE : ambition > message<br>ACTION : rendre ponctuel/secondaire<br>RE-TEST : Lead plan + Mono<br>STOP : si film sert le texte <span class="ref">[REF:R3-10]</span></div>
+    <div class="stop"><b>[PATH:Delay rythmique / Ping-pong wide]</b><br>SYMPTÔME : pattern domine / mono fragile<br>CAUSE : motif trop dominant<br>ACTION : réduire dominance<br>RE-TEST : Groove + Mono<br>STOP : phrase gagne et centre tient <span class="ref">[REF:R3-04]</span></div>
+    <div class="stop"><b>[PATH:Convolution spéciale]</b><br>SYMPTÔME : monde incohérent<br>CAUSE : IR signature non au service<br>ACTION : refuser/remplacer IR<br>RE-TEST : Cohérence + Passage dense<br>STOP : si un monde tient</div>
+
+    <h3>C) Spécifiques au TARGET (si supports requis)</h3>
+    <div class="stop">SYMPTÔME : backs/doubles trop devant<br>CAUSE : espace flatteur sur secondaires<br>ACTION : reculer couches secondaires<br>RE-TEST : Mute SUPPORTS + Dense<br>STOP : message au centre <span class="ref">[REF:R3-04]</span></div>
+    <div class="stop">SYMPTÔME : côtés plus proches que centre<br>CAUSE : profondeur mal répartie<br>ACTION : réduire proximité des côtés<br>RE-TEST : Side-only + Bas volume<br>STOP : centre dominant <span class="ref">[REF:R3-04]</span></div>
+    <div class="stop">SYMPTÔME : deux mondes (collé + lointain)<br>CAUSE : écart direct/espace trop grand<br>ACTION : rapprocher l’espace du direct<br>RE-TEST : Dense + LISTEN:Plan<br>STOP : scène colle sans reculer</div>
+    <div class="stop">SYMPTÔME : mono creux à cause returns<br>CAUSE : décorrélation / annulations<br>ACTION : remplacer par version robuste<br>RE-TEST : Mono + SIG OFF vs ON<br>STOP : mono acceptable <span class="ref">[REF:R3-04]</span> <span class="ref">[REF:R3-02]</span></div>
+  </article>
+
+  <article class="resource" data-resource-id="p13-soclefail" data-tags="DOOR:P13 TYPE:FAIL">
+    <h2>5) [IF:FAIL] SYMPTÔMES SOCLE (retour Phase 2) → ACTION</h2>
+    <div class="stop"><b>SYMPTÔME SOCLE</b> : tu utilises l’espace pour “faire exister” la voix<br><b>CAUSE</b> : hiérarchie/place non résolue<br><b>ACTION</b> : réduire l’espace et accepter le vide (1 levier)<br><b>RE-TEST</b> : SIG OFF vs ON + Bas volume<br><b>STOP</b> : si lead tient, sinon rollback P8/P9/P10 <span class="ref">[REF:R3-03]</span> <span class="ref">[REF:R3-01]</span></div>
+    <div class="stop"><b>SYMPTÔME SOCLE</b> : lead recule même sans FX<br><b>CAUSE</b> : place/contrôle pas verrouillés<br><b>ACTION</b> : rollback Phase 2 sur cause prouvée<br><b>RE-TEST</b> : Bas volume + Dense<br><b>STOP</b> : dry/SIG OFF tient, puis retour P13 <span class="ref">[REF:R3-01]</span> <span class="ref">[REF:R3-11]</span></div>
+    <div class="stop"><b>SYMPTÔME SOCLE</b> : sibilance/harsh réapparaît “dans l’air”<br><b>CAUSE</b> : contrôle fragile, l’espace expose<br><b>ACTION</b> : rollback Phase 2 sur contrôle<br><b>RE-TEST</b> : Dense + Bas volume<br><b>STOP</b> : base tient, puis retour P13 <span class="ref">[REF:R3-01]</span> <span class="ref">[REF:R3-06]</span></div>
+  </article>
+
+  <article class="resource" data-resource-id="p13-listen" data-tags="DOOR:P13 TYPE:TECH">
+    <h2>6) LISTEN PANELS</h2>
+    <div class="stop"><b>[LISTEN:Plan]</b><br>But : “centre devant / couches derrière” en 1 phrase.<br>Symptômes : hésitation, scène confuse, côtés trop proches, deux mondes.<br>1 levier : unifier par section OU resserrer largeur.<br>Re-test : Mono + Lead plan.<br>STOP : si plan décrivable simplement.</div>
+    <div class="stop"><b>[LISTEN:Diction]</b><br>But : consonnes intactes quand l’espace apparaît.<br>Symptômes : syllabes noyées, attaques mangées, S événements.<br>1 levier : duck/timing OU séparer direct.<br>Re-test : Dense + Diction.<br>STOP : phrase nette.</div>
+    <div class="stop"><b>[LISTEN:Groove]</b><br>But : delay/throws renforcent sans parasiter.<br>Symptômes : écho répond mal, pattern domine.<br>1 levier : simplifier OU rendre plus discret.<br>Re-test : Dense + Groove.<br>STOP : flow évident.</div>
+    <p class="muted"><b>[OPT] LISTEN SCAN</b> : Plan → Diction → Fins → Mono → Groove (1 intention).</p>
+  </article>
+
+  <article class="resource" data-resource-id="p13-techpack" data-tags="DOOR:P13 TYPE:TECH">
+    <h2>7) TECH PACK (hors flux)</h2>
+    <h3>A) Général P13</h3>
+    <ul>
+      <li>P13 = mise en scène : reverb/delay positionnent et hiérarchisent, ils ne décorent pas.</li>
+      <li>Un bon espace se ressent sans attirer l’attention ; si tu l’entends d’abord, il est trop présent. <span class="ref">[REF:R3-10]</span></li>
+      <li>Principe : SEND/RETURN par défaut (dosage, cohérence, automation, EQ/duck sur l’effet sans toucher au dry). <span class="ref">[REF:R3-13]</span></li>
+      <li>Insert uniquement si design assumé ; sinon risque de voler le message. <span class="ref">[REF:R3-10]</span></li>
+      <li>Système minimal : 1 espace commun + 1 espace d’accent (throws).</li>
+      <li>Check 0 anti-biais : return level-match puis paramètres. <span class="ref">[REF:R3-05]</span></li>
+      <li>Filtrage returns : enlever bas, calmer haut ; sinon boue/fizz et fatigue. <span class="ref">[REF:R3-06]</span></li>
+      <li>Centre sacré : décorrélation qui casse le centre = FAIL. <span class="ref">[REF:R3-04]</span></li>
+      <li>Cohérence : un seul monde par section ; changement accidentel = recadrage. <span class="ref">[REF:R3-16]</span></li>
+      <li>Stutter delay : scène/throw = P13 ; moteur rythmique = P15.</li>
+    </ul>
+
+    <h3>[PARAMS:HIDDEN] Repères concrets</h3>
+    <ul>
+      <li>Filtrage return : couper bas + calmer haut ; possible creux bas-médium si voile.</li>
+      <li>Pré-delay : colle vs séparation.</li>
+      <li>Decay/feedback : débit rapide → plus court ; lent → ducking prioritaire.</li>
+      <li>Diffusion/width : lisse vs granuleux ; lead tolère largeur modérée.</li>
+      <li>Combo robuste : reverb plus centrée + delay plus large.</li>
+      <li>Chaîne return type : filtre → contrôle agressivité → contrôle dynamique/duck → (option) couleur → width/MS.</li>
+    </ul>
+
+    <h3>B) Presets PATH</h3>
+    <p class="muted">Les détails preset peuvent aussi être rendus depuis un registry plus tard. Pour l’instant, ceci sert de fiche.</p>
+    <ul>
+      <li><b>Ultra dry</b> : impact/docu — risque plat — checkpoint: espace minimal mono-safe.</li>
+      <li><b>Tight room</b> : proche/réaliste — risque boxy/voile — checkpoint: diction en dense.</li>
+      <li><b>Plate luxe</b> : halo dense — risque diction noyée — checkpoint: consonnes + fins.</li>
+      <li><b>Chamber</b> : naturel/élégant — risque flou — checkpoint: cohérence + bas volume.</li>
+      <li><b>Hall cinematic</b> : grand écran — risque tails envahissantes — checkpoint: centre sacré + mono.</li>
+      <li><b>Slapback</b> : épaisseur/vibe — risque répétition — checkpoint: groove + diction.</li>
+      <li><b>Delay rythmique</b> : bounce — risque pattern dominant — checkpoint: dense + phrase gagne.</li>
+      <li><b>Ping-pong wide</b> : scène large — risque mono fragile — checkpoint: mono + centre stable.</li>
+      <li><b>Throws/Multi-tap</b> : ponctuation — risque gimmick — checkpoint: cohérence + groove.</li>
+      <li><b>Signature</b> : design assumé — risque fatigue/mono — checkpoint: ponctuel + centre sacré <span class="ref">[REF:R3-10]</span> <span class="ref">[REF:R3-04]</span></li>
+      <li><b>Convolution spéciale</b> : IR atypiques — risque résonances/incohérence — checkpoint: cohérence + dense.</li>
+    </ul>
+
+    <h3>C) Preset TARGET:P13</h3>
+    <ul>
+      <li>RETURNS : point de contrôle (filtre + contrôle dynamique sur returns, pas sur dry).</li>
+      <li>LEAD : sends dosés ; priorité au plan (devant), pas “beau”. <span class="ref">[REF:R3-04]</span></li>
+      <li>DOUBLES/BACKS : plus loin = plus sombre et moins intelligible. <span class="ref">[REF:R3-04]</span></li>
+      <li>ADLIBS/CHOPS : throws ponctuels ; éviter gimmick constant. <span class="ref">[REF:R3-10]</span></li>
+      <li>BUS VOCAL/MIXBUS : rare ; déclarer et tester cumul invisible. <span class="ref">[REF:R3-12]</span> <span class="ref">[REF:R3-13]</span></li>
+    </ul>
+  </article>
+
+  <article class="resource" data-resource-id="p13-busmap" data-tags="DOOR:P13 TYPE:TECH">
+    <h2>8) [BUSMAP:P13]</h2>
+    <p><b>Schéma minimal</b></p>
+    <ul>
+      <li>1 BUS REVERB (espace commun)</li>
+      <li>1 BUS DELAY (scène/largeur)</li>
+      <li>(Option) 1 BUS THROWS (accents ponctuels)</li>
+    </ul>
+    <p class="muted"><b>Règles</b></p>
+    <ul>
+      <li>Sends post-fader par défaut ; pré-fader seulement si intention.</li>
+      <li>Contrôle = return → send → paramètres. <span class="ref">[REF:R3-05]</span></li>
+      <li>ON/OFF attendu : SIG OFF coupe returns+throws ; SIG ON active uniquement commit+automation. <span class="ref">[REF:R3-02]</span></li>
+      <li>Décision “moteur vs tails” (prépare P15) : sends avant moteur si tu veux hacher dry sans hacher tails. <span class="ref">[REF:R3-13]</span></li>
+    </ul>
+  </article>
+
+  <article class="resource" data-resource-id="p13-modules" data-tags="DOOR:P13 TYPE:TECH">
+    <h2>9) MINI-MODULES STANDARD</h2>
+    <ul>
+      <li>[CHECKPOINT:MONO-SAFE]</li>
+      <li>[CHECKPOINT:TAILS-CLEAN]</li>
+      <li>[CHECKPOINT:FATIGUE]</li>
+    </ul>
+  </article>
+
+  <article class="resource" data-resource-id="p13-depends" data-tags="DOOR:P13 TYPE:TECH">
+    <h2>10) ⚠ DEPENDS / REOPENS</h2>
+    <ul>
+      <li>⚠ [DEPENDS_ON:P11] : si “personnage” change sans intention, recadrer. <span class="ref">[REF:R3-16]</span></li>
+      <li>⚠ [DEPENDS_ON:P8] : si place/hiérarchie pas gagnée, P13 devient béquille. <span class="ref">[REF:R3-03]</span></li>
+      <li>⚠ [DEPENDS_ON:P10] : si sibilance/harsh fragile, l’espace expose et fatigue. <span class="ref">[REF:R3-06]</span></li>
+      <li>⚠ [REOPENS:P13] : si P15/P16 révèle lead recule / nuage / groove cassé / mono instable → re-test P13. <span class="ref">[REF:R3-07]</span></li>
+    </ul>
+    <p class="muted">Triggers : FAIL prouvé sur Check 0 / Lead plan / Diction / Fins / Groove / Mono / Cohérence.</p>
+  </article>
+
+  <article class="resource" data-resource-id="p13-checkpoints" data-tags="DOOR:P13 TYPE:TECH">
+    <h2>11) CHECKPOINTS (micro-checkpoint si porte à risque)</h2>
+    <ul>
+      <li><b>Quand</b> : si PATH = Hall/Signature/Ping-pong/Convolution OU throws multiples.</li>
+      <li><b>ON/OFF</b> : liste returns actifs + automation déclarée + test SIG OFF. <span class="ref">[REF:R3-02]</span></li>
+      <li><b>RISK_BADGE + trigger</b> : “nuage / mono / groove / FX sujet” + “réouvrir seulement sur FAIL prouvé”. <span class="ref">[REF:R3-18]</span></li>
+      <li><b>Preuve à conserver</b> : A/B bypass + SIG OFF vs ON (level-match). <span class="ref">[REF:R3-05]</span></li>
+    </ul>
+  </article>
+
+</div>

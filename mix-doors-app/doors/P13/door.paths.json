@@ -1,0 +1,15 @@
+{
+  "paths": [
+    { "id": "ultra_dry", "label": "Ultra dry", "croix": "moins “cinéma”", "riskFocus": "plat / voix “dans la tête”", "techRefKey": "ultra_dry" },
+    { "id": "tight_room", "label": "Tight room", "croix": "moins “grand monde”", "riskFocus": "boxy/voile", "techRefKey": "tight_room" },
+    { "id": "plate_luxe", "label": "Plate luxe", "croix": "moins “rap ultra sec”", "riskFocus": "diction noyée si non duckée", "techRefKey": "plate_luxe" },
+    { "id": "chamber", "label": "Chamber", "croix": "moins “ultra wide”", "riskFocus": "flou si trop long", "techRefKey": "chamber" },
+    { "id": "hall_cinematic", "label": "Hall cinematic", "croix": "moins lisible", "riskFocus": "tails envahissantes / FX sujet", "techRefKey": "hall_cinematic" },
+    { "id": "slapback", "label": "Slapback", "croix": "moins profondeur longue", "riskFocus": "répétition audible / groove", "techRefKey": "slapback" },
+    { "id": "delay_rythmique", "label": "Delay rythmique", "croix": "moins naturalité", "riskFocus": "masque texte / pattern dominant", "techRefKey": "delay_rythmique" },
+    { "id": "ping_pong_wide", "label": "Ping-pong wide", "croix": "moins mono béton", "riskFocus": "centre instable / corrélation", "techRefKey": "ping_pong_wide" },
+    { "id": "throws_multi_tap", "label": "Throws/Multi-tap", "croix": "moins monde stable", "riskFocus": "gimmick répétitif", "techRefKey": "throws_multi_tap" },
+    { "id": "signature", "label": "Signature", "croix": "moins robustesse universelle", "riskFocus": "fatigue / FX sujet / mono", "techRefKey": "signature" },
+    { "id": "convolution_speciale", "label": "Convolution spéciale", "croix": "moins contrôle simple", "riskFocus": "résonances / monde incohérent", "techRefKey": "convolution_speciale" }
+  ]
+}
