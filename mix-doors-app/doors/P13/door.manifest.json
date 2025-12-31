@@ -2,8 +2,8 @@
   "t3Order": ["state","path","target","core","tests","handoff","notes","journal"],
   "sections": [
     { "id":"state",  "level":"T3", "label":"0) [STATE]", "collapsible": false, "mount": null },
-    { "id":"path",   "level":"T3", "label":"1) PATH", "collapsible": false, "mount": "path-picker" },
-    { "id":"target", "level":"T3", "label":"1bis) TARGET", "collapsible": false, "mount": "target-picker" },
+    { "id":"path",   "level":"T3", "label":"1) PATH", "collapsible": false, "mount": "path-table" },
+    { "id":"target", "level":"T3", "label":"1bis) TARGET", "collapsible": false, "mount": "target-table" },
     { "id":"core",   "level":"T3", "label":"[CORE]", "collapsible": false, "mount": null },
     { "id":"tests",  "level":"T3", "label":"2) [TEST:ALWAYS]", "collapsible": false, "mount": "tests-table" },
     { "id":"handoff","level":"T3", "label":"12) HANDOFF", "collapsible": false, "mount": null },

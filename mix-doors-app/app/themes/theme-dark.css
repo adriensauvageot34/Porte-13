@@ -1,2 +1,18 @@
-@import '../ui/styles/base.css';
-@import '../ui/styles/cards.css';
+:root {
+  color-scheme: dark;
+  --bg: #0e1117;
+  --panel: #131826;
+  --panel-strong: #0c0f18;
+  --card: #171d2c;
+  --accent: #6ad1ff;
+  --accent-strong: #3aa3ff;
+  --text: #e8ecf5;
+  --muted: #a7b1c6;
+  --line: #1f2637;
+  --line-strong: #2d3750;
+  --tag: #222c41;
+  --danger: #ffb686;
+  --danger-strong: #f17b50;
+  --success: #72e0a8;
+  --warning: #ffd166;
+}

@@ -1,36 +1,15 @@
 import { Store } from './store.js';
-import { loadState, saveState } from './persistence.js';
+import { loadState } from './persistence.js';
 import { renderLayout } from '../ui/layout.js';
 import { mountRunBar } from '../ui/components/runBar.js';
 import { enableTooltips } from '../ui/components/tooltips.js';
 import { mountCommandPalette } from '../ui/components/commandPalette.js';
 import { setupBindings } from './bindings.js';
-import { mountPathPicker, mountTargetPicker, mountTestsTable } from '../ui/components/mounts.js';
+import { mountPathTable, mountTargetTable, mountTestsTable } from '../ui/components/mounts.js';
 import { openResource } from '../ui/viewer/drawer.js';
+import { defaultDoorId, doorList, getDoorById } from '../domain/doorpacks.js';
 
-async function loadDoorPack(doorId) {
-  const base = `./doors/${doorId}/`;
-  const [meta, manifest, rules, tests, paths, targets, contentHtml, resourcesHtml] = await Promise.all([
-    fetch(`${base}door.meta.json`).then((r) => r.json()),
-    fetch(`${base}door.manifest.json`).then((r) => r.json()),
-    fetch(`${base}door.rules.json`).then((r) => r.json()),
-    fetch(`${base}door.tests.json`).then((r) => r.json()),
-    fetch(`${base}door.paths.json`).then((r) => r.json()),
-    fetch(`${base}door.targets.json`).then((r) => r.json()),
-    fetch(`${base}door.content.html`).then((r) => r.text()),
-    fetch(`${base}door.resources.html`).then((r) => r.text())
-  ]);
-  return {
-    meta,
-    manifest,
-    rules,
-    tests,
-    paths: paths.paths || [],
-    targets: targets.targets || [],
-    contentHtml,
-    resourcesHtml
-  };
-}
+const mountedStyles = new Set();
 
 function mapResources(resourcesRoot) {
   const map = {};
@@ -83,7 +62,10 @@ function syncDerivedFields(store, door) {
     ? Array.from(new Set(store.state.path.trials))
     : [];
   const limitedTrials = trialMax ? uniqueTrials.slice(0, trialMax) : uniqueTrials;
-  if (store.state.path.trials?.length !== limitedTrials.length || uniqueTrials.some((val, idx) => store.state.path.trials[idx] !== val)) {
+  if (
+    store.state.path.trials?.length !== limitedTrials.length ||
+    uniqueTrials.some((val, idx) => store.state.path.trials[idx] !== val)
+  ) {
     pathUpdates.trials = limitedTrials;
   }
 
@@ -101,22 +83,65 @@ function syncDerivedFields(store, door) {
   }
 }
 
-async function bootstrap() {
-  const doorId = 'P13';
-  const door = await loadDoorPack(doorId);
+function applyDoorStyle(door) {
+  if (!door?.style || mountedStyles.has(door.meta.id)) return;
+  const style = document.createElement('style');
+  style.dataset.doorStyle = door.meta.id;
+  style.textContent = door.style;
+  document.head.appendChild(style);
+  mountedStyles.add(door.meta.id);
+}
+
+function resolveDoorIdFromHash() {
+  const hash = window.location.hash.replace(/^#/, '');
+  if (!hash) return null;
+  const params = new URLSearchParams(hash);
+  return params.get('door');
+}
+
+function updateHash(doorId) {
+  const params = new URLSearchParams(window.location.hash.replace(/^#/, ''));
+  params.set('door', doorId);
+  window.location.hash = params.toString();
+}
+
+function cleanListeners(node) {
+  const clone = node.cloneNode(true);
+  node.replaceWith(clone);
+  return clone;
+}
+
+async function renderDoor(doorId) {
+  const door = getDoorById(doorId) || getDoorById(defaultDoorId);
+  if (!door) return;
+  applyDoorStyle(door);
+
   const store = new Store(door.meta);
   const persisted = loadState(door.meta.id, store.state.runId);
   if (persisted) store.hydrate(persisted);
 
-  const { contentRoot, resourcesRoot } = renderLayout({
+  const { contentRoot, resourcesRoot, doorSelect } = renderLayout({
     meta: door.meta,
     manifest: door.manifest,
     contentHtml: door.contentHtml,
-    resourcesHtml: door.resourcesHtml
+    resourcesHtml: door.resourcesHtml,
+    doors: doorList,
+    currentDoorId: door.meta.id,
   });
 
-  mountPathPicker(contentRoot.querySelector('[data-mount="path-picker"]'), door.paths, door.rules?.path);
-  mountTargetPicker(contentRoot.querySelector('[data-mount="target-picker"]'), door.targets, door.rules?.targets);
+  if (doorSelect) {
+    doorSelect.value = door.meta.id;
+    const freshSelect = cleanListeners(doorSelect);
+    freshSelect.addEventListener('change', (event) => {
+      updateHash(event.target.value);
+      renderDoor(event.target.value);
+    });
+  }
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  mountPathTable(contentRoot.querySelector('[data-mount="path-table"]'), door.paths, door.rules?.path);
+  mountTargetTable(contentRoot.querySelector('[data-mount="target-table"]'), door.targets, door.rules?.targets);
   mountTestsTable(contentRoot.querySelector('[data-mount="tests-table"]'), door.tests);
 
   setupBindings(store);
@@ -131,4 +156,7 @@ async function bootstrap() {
   store.subscribe(() => syncDerivedFields(store, door));
 }
 
-document.addEventListener('DOMContentLoaded', bootstrap);
+document.addEventListener('DOMContentLoaded', () => {
+  const doorId = resolveDoorIdFromHash() || defaultDoorId;
+  renderDoor(doorId);
+});

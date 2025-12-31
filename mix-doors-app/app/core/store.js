@@ -2,9 +2,7 @@ const defaultState = (doorMeta, runId = 'global') => ({
   schemaVersion: 1,
   doorId: doorMeta?.id || 'unknown',
   runId,
-  status: 'ACTIVE',
-  toggles: { sigOff: false, ctrlOff: false },
-  state: { riskBadge: '' },
+  state: { status: 'ACTIVE', toggles: { SIG_OFF: false, CTRL_OFF: false }, riskBadge: '' },
   path: { trials: [], commit: null, croix: '', riskFocus: '' },
   targets: { primary: 'RETURNS', secondary: [] },
   core: {
@@ -15,7 +13,7 @@ const defaultState = (doorMeta, runId = 'global') => ({
     targetSecondary: '',
     constats: ''
   },
-  handoff: { riskBadge: '', nextDoor: 'P14' },
+  handoff: { riskBadge: '', nextDoor: doorMeta?.next || 'P14' },
   notes: { trials: ['', ''], constats: '', oreilleNeuve: '' },
   journalDraft: { date: '', action: '', result: '', needsRetest: '', riskBadge: '' },
   tests: {}
@@ -45,7 +43,18 @@ export class Store {
   hydrate(data) {
     if (!data) return;
     const base = defaultState({ id: data.doorId || 'unknown' }, data.runId);
-    this.state = mergeDeep(base, data);
+    const normalized = { ...data };
+    if (data.status || data.toggles) {
+      normalized.state = {
+        ...(data.state || {}),
+        status: data.status || data.state?.status || 'ACTIVE',
+        toggles: {
+          SIG_OFF: data.toggles?.sigOff ?? data.state?.toggles?.SIG_OFF ?? false,
+          CTRL_OFF: data.toggles?.ctrlOff ?? data.state?.toggles?.CTRL_OFF ?? false,
+        },
+      };
+    }
+    this.state = mergeDeep(base, normalized);
     this.notify();
   }
 

@@ -1,1 +1,35 @@
-/* placeholder style */
+@media print {
+  body {
+    background: white;
+    color: #111;
+  }
+
+  aside,
+  .runbar,
+  .drawer,
+  .command-palette,
+  button {
+    display: none !important;
+  }
+
+  main {
+    padding: 0;
+  }
+
+  .card {
+    box-shadow: none;
+    border: 1px solid #ccc;
+    background: #fff;
+  }
+
+  table {
+    border-color: #ccc;
+  }
+
+  .tag,
+  .pill {
+    border-color: #ccc;
+    color: #333;
+    background: #f3f3f3;
+  }
+}
